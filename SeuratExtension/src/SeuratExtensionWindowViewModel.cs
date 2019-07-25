@@ -401,7 +401,7 @@ namespace SeuratExtension
             }
 
             // Run tSNE and k-Means
-            Clustering clusteredData = new Clustering(metrics, true, true, 3);
+            Clustering clusteredData = new Clustering(metrics, true, true, _clusterCount);
 
             var resultTSNE2D = clusteredData.tSNE2D;
             var resultTSNE3D = clusteredData.tSNE3D;
