@@ -418,6 +418,68 @@ namespace SeuratExtension
             csv.AppendLine("];");
             File.WriteAllText(_folder + "\\metrics.js", csv.ToString());
 
+            var resultsData = new StringBuilder();
+            resultsData.AppendLine("var metricsValues = [");
+            for (var i=0; i < resultTSNE3D.Length; i++)
+            {
+                var newLine = "[";
+                for (int j = 0; j < resultTSNE3D[i].Length; j++)
+                {
+                    //newLine += "\"";
+                    newLine += resultTSNE3D[i][j] + ",";
+                }
+                newLine += kMeansLabels3D[i];
+                newLine += "],";
+                resultsData.AppendLine(newLine);
+            }
+            resultsData.AppendLine("];");
+
+            resultsData.AppendLine("var allLabels = [");
+            var newLine1 = "";
+            for (int j = 0; j < toRun.goals.Length; j++)
+            {
+                newLine1 += "\"";
+                newLine1 += toRun.goals[j];
+                newLine1 += "\",";
+                
+            }
+            for(int j = 0; j < toRun.variables.Length; j++)
+            {
+                newLine1 += "\"";
+                newLine1 += toRun.variables[j];
+                newLine1 += "\"";
+
+                if (j < toRun.variables.Length - 1)
+                {
+                    newLine1 += ",";
+                }
+            }
+            resultsData.AppendLine(newLine1);
+            resultsData.AppendLine("];");
+
+            resultsData.AppendLine("var allValues = [");
+            for (var i = 0; i < toRun.solutions.Length; i++)
+            {
+                var newLine = "[";
+                for (int j = 0; j < toRun.solutions[i].Length; j++)
+                {
+                    //newLine += "\"";
+                    newLine += toRun.solutions[i][j];
+                    if (j < toRun.solutions[i].Length - 1)
+                    {
+                        newLine += ",";
+                    }
+                }
+                newLine += "],";
+                resultsData.AppendLine(newLine);
+            }
+            resultsData.AppendLine("];");
+
+
+
+
+            File.WriteAllText(_folder + "\\results.js", resultsData.ToString());
+
             // Copy files
             var fileNames = new string[] { "index.html", "playground.css", "playground.js", "vis-graph3d.min.js" };
             foreach (var fileName in fileNames) {
