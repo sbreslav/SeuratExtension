@@ -424,13 +424,9 @@ namespace SeuratExtension
                 for (int j = 0; j < resultTSNE3D[i].Length; j++)
                 {
                     //newLine += "\"";
-                    newLine += resultTSNE3D[i][j];
-                    //newLine += "\"";
-                    if (j < resultTSNE3D[i].Length - 1)
-                    {
-                        newLine += ",";
-                    }
+                    newLine += resultTSNE3D[i][j] + ",";
                 }
+                newLine += kMeansLabels3D[i];
                 newLine += "],";
                 resultsData.AppendLine(newLine);
             }
