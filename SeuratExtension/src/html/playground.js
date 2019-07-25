@@ -5,27 +5,12 @@ function load() {
   draw();
 }
 
-
-
 function round(value, decimals) {
   return parseFloat(value.toFixed(decimals));
 }
 
 function loadCsvColoredDotsExample() {
   var csv = "";
-
-
-  // also adjust some settings
-  //document.getElementById("style").value = "dot-color";
-  //document.getElementById("verticalRatio").value = "1.0";
-  //document.getElementById("showPerspective").checked = true;
-
-  //document.getElementById("xLabel").value = "x";
-  //document.getElementById("yLabel").value = "y";
-  //document.getElementById("zLabel").value = "z";
-  //document.getElementById("legendLabel").value = "distance"
-  //document.getElementById("filterLabel").value = "";
-  
 
   drawCsv();
 }
@@ -36,7 +21,7 @@ function loadCsvColoredDotsExample() {
  * @param {boolean} [skipValue] | if true, the 4th element is a filter value
  * @return {vis.DataSet}
  */
-function getDataCsv() {
+function getDataMetrics() {
   //var csv = data; //document.getElementById("csvTextarea").value;
 
   // parse the csv content
@@ -55,49 +40,19 @@ function getDataCsv() {
       data.add({x:parseFloat(csvArray[row][0]),
         y:parseFloat(csvArray[row][1]),
         z:parseFloat(csvArray[row][2]),
-        style:parseFloat(csvArray[row][3])});
+        style:parseFloat(csvArray[row][3]),
+        id: row
+      });
   
   }
 
   return data;
 }
 
-/**
- * remove leading and trailing spaces
- */
-function trim(text) {
-  while (text.length && text.charAt(0) == ' ')
-    text = text.substr(1);
-
-  while (text.length && text.charAt(text.length-1) == ' ')
-    text = text.substr(0, text.length-1);
-
-  return text;
-}
-
-/**
- * Retrieve the datatable from the entered contents of the javascript text
- * @return {vis.DataSet}
- */
-function getDataJson() {
-  var json = document.getElementById("jsonTextarea").value;
-  var data = new google.visualization.DataTable(json);
-
-  return data;
-}
 
 
-/**
- * Retrieve the datatable from the entered contents of the javascript text
- * @return {vis.DataSet}
- */
-function getDataJavascript() {
-  var js = document.getElementById("javascriptTextarea").value;
 
-  eval(js);
 
-  return data;
-}
 
 
 /**
@@ -110,7 +65,7 @@ function getDataDatasource() {
 /**
  * Retrieve a JSON object with all options
  */
-function getOptions() {
+function getOptions(data) {
   var options = {
     tooltip: true,
     width: "100%",
@@ -135,6 +90,14 @@ function getOptions() {
     xCenter:           "55%",
     yCenter:           "45%",
     onclick: function(point){
+      var value = "id:" + point.id + "\n";
+      value += "X:" + point.x + "\n";
+      value += "Y:" + point.y + "\n";
+      value += "Z:" + point.z + "\n";
+      for(var i=0; i < allLabels.length; i++){
+        value += allLabels[i] + ": " + allValues[point.id][i] + "\n";
+      }
+      document.getElementById("detailArea").value = value;
       console.log("OnClick", point);
     }
   };
@@ -152,7 +115,7 @@ function draw() {
 
 function drawCsv() {
   // retrieve data and options
-  var data = getDataCsv();
+  var data = getDataMetrics();
   var options = getOptions();
 
   // Creat a graph

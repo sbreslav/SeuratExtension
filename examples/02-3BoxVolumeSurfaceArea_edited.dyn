@@ -2374,13 +2374,13 @@
           "dd20e755bd1e43998e1e93da431ea3bc"
         ],
         "Left": 15.427982163100069,
-        "Top": -973.3919920627684,
-        "Width": 632.23562714206912,
-        "Height": 657.029896763099,
+        "Top": -973.19199206276835,
+        "Width": 632.03562714206919,
+        "Height": 656.62989676309894,
         "FontSize": 48.0,
         "InitialTop": -790.3919920627684,
         "InitialHeight": 411.02989676309903,
-        "TextblockHeight": 173.0,
+        "TextblockHeight": 172.8,
         "Background": "#FFFFFFFF"
       },
       {
@@ -2396,7 +2396,7 @@
         "FontSize": 14.0,
         "InitialTop": -444.14244064404465,
         "InitialHeight": 140.0,
-        "TextblockHeight": 20.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFFFC999"
       },
       {
@@ -2408,11 +2408,11 @@
         "Left": 651.884640079439,
         "Top": -634.82412613856036,
         "Width": 314.0,
-        "Height": 146.0,
+        "Height": 146.4,
         "FontSize": 14.0,
         "InitialTop": -604.82412613856036,
         "InitialHeight": 140.0,
-        "TextblockHeight": 20.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFB9F9E1"
       },
       {
@@ -2424,11 +2424,11 @@
         "Left": 651.884640079439,
         "Top": -792.04474297171055,
         "Width": 314.0,
-        "Height": 146.0,
+        "Height": 146.4,
         "FontSize": 14.0,
         "InitialTop": -762.04474297171055,
         "InitialHeight": 140.0,
-        "TextblockHeight": 20.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFFFB8D8"
       },
       {
@@ -2445,13 +2445,13 @@
           "2a8616525033489d84d8ef25f70c9d0e"
         ],
         "Left": 1090.51183856252,
-        "Top": -814.923828114962,
-        "Width": 319.0,
-        "Height": 771.136889729832,
+        "Top": -704.923828114962,
+        "Width": 319.6,
+        "Height": 661.336889729832,
         "FontSize": 36.0,
         "InitialTop": -674.923828114962,
         "InitialHeight": 708.136889729832,
-        "TextblockHeight": 130.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFFFB8D8"
       },
       {
@@ -2463,13 +2463,13 @@
           "d0b806b6541043bdb06b0b44e2d2cb34"
         ],
         "Left": 3466.0070504377691,
-        "Top": -927.83472521931446,
-        "Width": 514.82031582651871,
-        "Height": 363.61364785663477,
+        "Top": -817.83472521931446,
+        "Width": 515.02031582651875,
+        "Height": 252.81364785663476,
         "FontSize": 36.0,
         "InitialTop": -787.83472521931446,
-        "InitialHeight": 338.52587017499127,
-        "TextblockHeight": 130.0,
+        "InitialHeight": 259.61364785663477,
+        "TextblockHeight": 0.0,
         "Background": "#FFFFC999"
       },
       {
@@ -2480,13 +2480,13 @@
           "9956fdd866ea41a1bb50a2c1a9dbf5b6"
         ],
         "Left": 2932.3175664052519,
-        "Top": -361.55594161292424,
-        "Width": 485.99658817659974,
-        "Height": 349.65028090419418,
+        "Top": -208.55594161292427,
+        "Width": 485.59658817659977,
+        "Height": 196.6502809041942,
         "FontSize": 36.0,
         "InitialTop": -178.55594161292427,
         "InitialHeight": 218.6502809041942,
-        "TextblockHeight": 173.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFB9F9E1"
       },
       {
@@ -2510,13 +2510,13 @@
           "1c5db808acc3420aa675d9b40083e555"
         ],
         "Left": 1557.0091909182522,
-        "Top": -1146.2620675450723,
-        "Width": 1293.8680132207899,
-        "Height": 933.76472367792712,
+        "Top": -1080.2620675450723,
+        "Width": 1293.06801322079,
+        "Height": 867.76472367792712,
         "FontSize": 36.0,
         "InitialTop": -1050.2620675450723,
         "InitialHeight": 889.76472367792712,
-        "TextblockHeight": 86.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFB9F9E1"
       },
       {
@@ -2527,13 +2527,13 @@
           "510c4573713c4fcaae07e7ac311836a4"
         ],
         "Left": 2983.87339565883,
-        "Top": -798.061794098778,
-        "Width": 214.47962830967708,
-        "Height": 361.22793343418778,
+        "Top": -688.061794098778,
+        "Width": 214.07962830967708,
+        "Height": 251.22793343418778,
         "FontSize": 36.0,
         "InitialTop": -658.061794098778,
         "InitialHeight": 273.22793343418778,
-        "TextblockHeight": 130.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFB9F9E1"
       },
       {
@@ -2545,13 +2545,13 @@
           "7fcb9f93670d4b22acafd99cdf085edc"
         ],
         "Left": 713.98670303021868,
-        "Top": -1608.9009094604155,
+        "Top": -1585.9009094604155,
         "Width": 106.12,
-        "Height": 363.84887762494236,
+        "Height": 340.84887762494236,
         "FontSize": 36.0,
         "InitialTop": -1555.9009094604155,
         "InitialHeight": 362.84887762494236,
-        "TextblockHeight": 43.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFFF7BAC"
       },
       {
@@ -2564,13 +2564,13 @@
           "fdb6e3d90a0042f79c03e229fb48065b"
         ],
         "Left": 901.23307780525749,
-        "Top": -1634.0412021836594,
-        "Width": 448.92052770131193,
-        "Height": 320.53532364482567,
+        "Top": -1611.0412021836594,
+        "Width": 449.72052770131194,
+        "Height": 297.53532364482567,
         "FontSize": 36.0,
         "InitialTop": -1581.0412021836594,
         "InitialHeight": 319.53532364482567,
-        "TextblockHeight": 43.0,
+        "TextblockHeight": 0.0,
         "Background": "#FF71C6A8"
       },
       {
