@@ -74,17 +74,21 @@ namespace SeuratExtension.src
             if (runTSNE2D)
             {
                 tSNE2D = runTSNE(refineryResults, 2);
+
+                // K-MEANS
                 var kMeans2D = getKMeansData(tSNE2D, clusters);
                 kMeansLabels2D = kMeans2D.Item1;
-                kMeansPoints2D = kMeans2D.Item2;
+                var rawkMeansPoints2D = kMeans2D.Item2;
+                kMeansPoints2D = runTSNE(rawkMeansPoints2D, 2);
             }
 
             if (runTSNE3D)
             {
                 tSNE3D = runTSNE(refineryResults, 3);
                 var kMeans3D = getKMeansData(tSNE3D, clusters);
-                kMeansLabels2D = kMeans3D.Item1;
-                kMeansPoints3D = kMeans3D.Item2;
+                kMeansLabels3D = kMeans3D.Item1;
+                var rawkMeansPoints3d = kMeans3D.Item2;
+                kMeansPoints3D = runTSNE(rawkMeansPoints3d, 3);
             }
 
         }
