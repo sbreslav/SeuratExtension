@@ -425,9 +425,8 @@ namespace SeuratExtension
                 string destFile = System.IO.Path.Combine(targetPath, fileName);
                 System.IO.File.Copy(sourceFile, destFile, true);
             }
-            //File.WriteAllText(_folder + "\\results.csv", csv.ToString());
-            //SaveResults(data, _folder + "\\results.csv");
-
+            string resultFile = System.IO.Path.Combine(_folder, "index.html");
+            System.Diagnostics.Process.Start(resultFile);
         }
 
         public string StripInvalidFileAndPathCharacters(string filename)
