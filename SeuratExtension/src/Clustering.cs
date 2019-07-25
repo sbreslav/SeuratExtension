@@ -45,12 +45,12 @@ namespace SeuratExtension.src
         // testing data
         public Clustering()
         {
-            tSNE2D = runTSNE(observations, 2);
+            tSNE2D = runTSNE(observations, 2, 1.5);
             var kMeans2D = getKMeansData(tSNE2D, 3);
             kMeansLabels2D = kMeans2D.Item1;
             kMeansPoints2D = kMeans2D.Item2;
 
-            tSNE3D = runTSNE(observations, 3);
+            tSNE3D = runTSNE(observations, 3, 1.5);
             var kMeans3D = getKMeansData(tSNE3D, 3);
             kMeansLabels2D = kMeans3D.Item1;
             kMeansPoints3D = kMeans3D.Item2;
@@ -78,8 +78,8 @@ namespace SeuratExtension.src
                 // K-MEANS
                 var kMeans2D = getKMeansData(tSNE2D, clusters);
                 kMeansLabels2D = kMeans2D.Item1;
-                var rawkMeansPoints2D = kMeans2D.Item2;
-                kMeansPoints2D = runTSNE(rawkMeansPoints2D, 2, 0.2);
+                //var rawkMeansPoints2D = kMeans2D.Item2;
+                //kMeansPoints2D = runTSNE(rawkMeansPoints2D, 2, 0.2);
             }
 
             if (runTSNE3D)
@@ -87,8 +87,8 @@ namespace SeuratExtension.src
                 tSNE3D = runTSNE(refineryResults, 3, 1.5);
                 var kMeans3D = getKMeansData(tSNE3D, clusters);
                 kMeansLabels3D = kMeans3D.Item1;
-                var rawkMeansPoints3d = kMeans3D.Item2;
-                kMeansPoints3D = runTSNE(rawkMeansPoints3d, 3, 0.2);
+                //var rawkMeansPoints3d = kMeans3D.Item2;
+                //kMeansPoints3D = runTSNE(rawkMeansPoints3d, 3, 0.2);
             }
 
         }
@@ -112,13 +112,13 @@ namespace SeuratExtension.src
             // run 2d or 3d only if selected
             if (runTSNE2D)
             {
-                tSNE2D = runTSNE(refineryResults, 2, 1.5);
+                tSNE2D = runTSNE(refineryResults, 2, 0.2);
                 kMeansLabels2D = getLabelsForKMeansWithLabels(refineryResults, clusters, weights);
             }
 
             if (runTSNE3D)
             {
-                tSNE3D = runTSNE(refineryResults, 3, 1.5);
+                tSNE3D = runTSNE(refineryResults, 3, 0.2);
                 kMeansLabels3D = getLabelsForKMeansWithLabels(refineryResults, clusters, weights);
             }
 

@@ -89,6 +89,7 @@ function getOptions(data) {
     legendLabel:        "class",
     xCenter:           "55%",
     yCenter:           "45%",
+    dotSizeRatio:      0.01,
     onclick: function(point){
       var value = "id:" + point.id + "\n";
       value += "X:" + point.x + "\n";
