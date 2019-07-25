@@ -416,6 +416,27 @@ namespace SeuratExtension
             csv.AppendLine("];");
             File.WriteAllText(_folder + "\\metrics.js", csv.ToString());
 
+            var resultsData = new StringBuilder();
+            resultsData.AppendLine("var metricsValues = [");
+            for (var i=0; i < resultTSNE3D.Length; i++)
+            {
+                var newLine = "[";
+                for (int j = 0; j < resultTSNE3D[i].Length; j++)
+                {
+                    //newLine += "\"";
+                    newLine += resultTSNE3D[i][j];
+                    //newLine += "\"";
+                    if (j < resultTSNE3D[i].Length - 1)
+                    {
+                        newLine += ",";
+                    }
+                }
+                newLine += "],";
+                resultsData.AppendLine(newLine);
+            }
+            resultsData.AppendLine("];");
+            File.WriteAllText(_folder + "\\results.js", resultsData.ToString());
+
             // Copy files
             var fileNames = new string[] { "index.html", "playground.css", "playground.js", "vis-graph3d.min.js" };
             foreach (var fileName in fileNames) {

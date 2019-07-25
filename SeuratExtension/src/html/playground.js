@@ -131,14 +131,15 @@ function getDataDatasource() {
  */
 function getOptions() {
   var options = {
-    width:              document.getElementById("width").value,
-    height:             document.getElementById("height").value,
-    style:              document.getElementById("style").value,
-    showAnimationControls: (document.getElementById("showAnimationControls").checked != false),
-    showGrid:          (document.getElementById("showGrid").checked != false),
-    showXAxis:         (document.getElementById("showXAxis").checked != false),
-    showYAxis:         (document.getElementById("showYAxis").checked != false),
-    showZAxis:         (document.getElementById("showZAxis").checked != false),
+    tooltip: true,
+    width: "100%",
+    height:    "100%",
+    style:    "dot-color",
+    showAnimationControls: false,
+    showGrid:          true,
+    showXAxis:         true,
+    showYAxis:         true,
+    showZAxis:         true,
     showPerspective:   (document.getElementById("showPerspective").checked != false),
     showLegend:        (document.getElementById("showLegend").checked != false),
     showShadow:        (document.getElementById("showShadow").checked != false),
@@ -170,7 +171,10 @@ function getOptions() {
     valueMax:          Number(document.getElementById("valueMax").value) || undefined,
 
     xBarWidth:         Number(document.getElementById("xBarWidth").value) || undefined,
-    yBarWidth:         Number(document.getElementById("yBarWidth").value) || undefined
+    yBarWidth:         Number(document.getElementById("yBarWidth").value) || undefined,
+    onclick: function(point){
+      console.log("OnClick", point);
+    }
   };
 
   return options;
