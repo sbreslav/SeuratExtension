@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
+using SeuratExtension.src;
 
 namespace SeuratExtension
 {
@@ -37,6 +38,10 @@ namespace SeuratExtension
 
         public void Loaded(ViewLoadedParams p)
         {
+            // tSNE Sandbox
+            var cluster = new Clustering();
+
+
             // Save a reference to your loaded parameters.
             // You'll need these later when you want to use
             // the supplied workspaces
