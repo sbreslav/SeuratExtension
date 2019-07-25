@@ -68,6 +68,9 @@
     <PackageReference Include="DynamoVisualProgramming.ZeroTouchLibrary" version="2.2.*">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Chart.Controls">
+      <Version>4.7.2046</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\Clustering.cs" />
@@ -107,6 +110,10 @@
     <BinFolder>$(PackageFolder)bin\</BinFolder>
     <ExtraFolder>$(PackageFolder)extra\</ExtraFolder>
     <DyfFolder>$(PackageFolder)dyf\</DyfFolder>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy  /S /Y $(ProjectDir)src\html\*.*  $(ProjectDir)$(OutDir)
+xcopy /S /Y $(ProjectDir)src\html\*.* "%25appdata%25\Dynamo\Dynamo Core\2.2\packages\SeuratExtension\extra\"</PostBuildEvent>
   </PropertyGroup>
   <Target Name="AfterBuild">
     <ItemGroup>

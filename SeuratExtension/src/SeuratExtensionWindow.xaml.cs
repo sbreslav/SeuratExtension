@@ -19,8 +19,8 @@ namespace SeuratExtension
 
             // Hide the options pane until something is selected
 
-            TaskOptions.Visibility = Visibility.Hidden;
-            TaskOptions.Height = 0;
+            //TaskOptions.Visibility = Visibility.Hidden;
+            //TaskOptions.Height = 0;
             _study = null;
             _hof = null;
         }
@@ -55,9 +55,9 @@ namespace SeuratExtension
             if (sender != null)
             {
                 _study = null;
-                TaskOptions.Visibility = Visibility.Hidden;
-                TaskOptions.Height = 0;
-                TaskOptions.Margin = new Thickness(0);
+                //TaskOptions.Visibility = Visibility.Hidden;
+                //TaskOptions.Height = 0;
+                //TaskOptions.Margin = new Thickness(0);
                 var grid = sender as DataGrid;
                 if (grid != null && grid.SelectedItems != null && grid.SelectedItems.Count == 1)
                 {
@@ -75,7 +75,7 @@ namespace SeuratExtension
             var viewModel = MainGrid.DataContext as SeuratExtensionWindowViewModel;
             if (_study != null && viewModel != null)
             {
-                ShowProgress(true);
+                //ShowProgress(true);
                 try
                 {
                     await viewModel.RunTasks(_study, _hof, _complete);
@@ -88,7 +88,7 @@ namespace SeuratExtension
                                     MessageBoxImage.Error);
                     viewModel.LogException(ex);
                 }
-                ShowProgress(false);
+                //ShowProgress(false);
             }
         }
 
@@ -108,20 +108,20 @@ namespace SeuratExtension
             var checkBox = sender as CheckBox;
             if (checkBox != null)
             {
-                var check = checkBox.IsChecked.Value;
-                DisplayOrHideControls(check);
+                //var check = checkBox.IsChecked.Value;
+                //DisplayOrHideControls(check);
             }
         }
 
         private void DisplayOrHideControls(bool check, bool forceHide = false)
         {
-            var val = check ? new GridLength(0, GridUnitType.Auto) : new GridLength(0);
+            //var val = check ? new GridLength(0, GridUnitType.Auto) : new GridLength(0);
 
             // Show/hide the load image checkbox, root filename and sort levels
 
-            TaskOptions.RowDefinitions[6].Height = val;
-            TaskOptions.RowDefinitions[7].Height = val;
-            TaskOptions.RowDefinitions[8].Height = val;
+            //TaskOptions.RowDefinitions[6].Height = val;
+            //TaskOptions.RowDefinitions[7].Height = val;
+            //TaskOptions.RowDefinitions[1].Height = val;
         }
 
         private void ShowProgress(bool showProgress)
@@ -130,7 +130,7 @@ namespace SeuratExtension
             var hide = showProgress ? Visibility.Hidden : Visibility.Visible;
             TaskOptions.Visibility = hide;
             StudyList.Visibility = hide;
-            ProgressGrid.Visibility = show;
+            //ProgressGrid.Visibility = show;
             var viewModel = MainGrid.DataContext as SeuratExtensionWindowViewModel;
             if (viewModel != null)
             {
