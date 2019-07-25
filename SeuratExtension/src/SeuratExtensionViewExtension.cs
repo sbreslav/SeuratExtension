@@ -39,7 +39,7 @@ namespace SeuratExtension
         public void Loaded(ViewLoadedParams p)
         {
             // tSNE Sandbox
-            var cluster = new Clustering();
+            //var cluster = new Clustering();
 
 
             // Save a reference to your loaded parameters.
