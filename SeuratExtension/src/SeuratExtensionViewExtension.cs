@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using Dynamo.ViewModels;
 using Dynamo.Wpf.Extensions;
 
 namespace SeuratExtension
@@ -40,10 +41,11 @@ namespace SeuratExtension
             // You'll need these later when you want to use
             // the supplied workspaces
 
-            sampleMenuItem = new MenuItem { Header = "Show View Extension Sample Window" };
+            sampleMenuItem = new MenuItem { Header = "Seurat Extension" };
             sampleMenuItem.Click += (sender, args) =>
             {
-                var viewModel = new SeuratExtensionWindowViewModel(p);
+                var dynViewModel = p.DynamoWindow.DataContext as DynamoViewModel;
+                var viewModel = new SeuratExtensionWindowViewModel(p, dynViewModel);
                 var window = new SeuratExtensionWindow
                 {
                     // Set the data context for the main grid in the window.
