@@ -12,11 +12,6 @@ using Accord.Statistics;
 
 namespace SeuratExtension.src
 {
-    // Testing the Principal Component Analysis
-    // Based on tutorial: https://arxiv.org/ftp/arxiv/papers/1210/1210.7463.pdf
-
-
-
     public class Clustering
     {
         // Figure out generator!! 
@@ -27,6 +22,9 @@ namespace SeuratExtension.src
 
         public int[] kMeansLabels2D;
         public int[] kMeansLabels3D;
+
+        public double[][] kMeansPoints2D;
+        public double[][] kMeansPoints3D;
 
         // Declare some observations
         double[][] observations =
@@ -44,6 +42,21 @@ namespace SeuratExtension.src
 
         double[] weights = { 1, 0.1, 0.5, 0.3 };
 
+        // testing data
+        public Clustering()
+        {
+            tSNE2D = runTSNE(observations, 2);
+            var kMeans2D = getKMeansData(tSNE2D, 3);
+            kMeansLabels2D = kMeans2D.Item1;
+            kMeansPoints2D = kMeans2D.Item2;
+
+            tSNE3D = runTSNE(observations, 3);
+            var kMeans3D = getKMeansData(tSNE3D, 3);
+            kMeansLabels2D = kMeans3D.Item1;
+            kMeansPoints3D = kMeans3D.Item2;
+        }
+
+
 
         // This constructor calls tSNE dimnesionality reduction.
         // After that is clusters the reduced data into provided number of clusters. 
@@ -55,16 +68,27 @@ namespace SeuratExtension.src
             kMeansLabels2D = new int[refineryResults.Length];
             kMeansLabels3D = new int[refineryResults.Length];
 
+            kMeansPoints2D = new double[refineryResults.Length][];
+            kMeansPoints3D = new double[refineryResults.Length][];
+
             if (runTSNE2D)
             {
                 tSNE2D = runTSNE(refineryResults, 2);
-                kMeansLabels2D = getLabelsForKMeans(tSNE2D, clusters);
+
+                // K-MEANS
+                var kMeans2D = getKMeansData(tSNE2D, clusters);
+                kMeansLabels2D = kMeans2D.Item1;
+                var rawkMeansPoints2D = kMeans2D.Item2;
+                kMeansPoints2D = runTSNE(rawkMeansPoints2D, 2);
             }
 
             if (runTSNE3D)
             {
                 tSNE3D = runTSNE(refineryResults, 3);
-                kMeansLabels3D = getLabelsForKMeans(tSNE3D, clusters);
+                var kMeans3D = getKMeansData(tSNE3D, clusters);
+                kMeansLabels3D = kMeans3D.Item1;
+                var rawkMeansPoints3d = kMeans3D.Item2;
+                kMeansPoints3D = runTSNE(rawkMeansPoints3d, 3);
             }
 
         }
@@ -100,7 +124,7 @@ namespace SeuratExtension.src
 
         }
 
-        // Simpliest implementation of tsne for the 2d double array
+        // TSNE 
         double[][] runTSNE(double[][] observations, int outputDimension)
         {
             // Create a new t-SNE algorithm 
@@ -119,20 +143,24 @@ namespace SeuratExtension.src
             return output;
         }
 
-        int[] getLabelsForKMeans(double[][] observations, int numberOfClusters)
+        Tuple<int[], double[][]> getKMeansData(double[][] observations, int numberOfClusters)
         {
             // Create a new K-Means algorithm
             KMeans kmeans = new KMeans(k: numberOfClusters);
-
+            
             // Compute and retrieve the data centroids
             var clusters = kmeans.Learn(observations);
+
+            // Get covariance to the list
+            var covariance = kmeans.Clusters[0].Covariance;
 
             // Use the centroids to parition all the data
             int[] labels = clusters.Decide(observations);
 
-            return labels;
+            return Tuple.Create(labels, covariance);
 
         }
+
 
         int[] getLabelsForKMeansWithLabels(double[][] observations, int numberOfClusters, double[] weights)
         {
@@ -155,29 +183,5 @@ namespace SeuratExtension.src
         }
 
 
-        // Standard deviation
-        void CalculateStandardDeviation(double[] x1, double[] x2)
-        {
-            // Compute means
-            double mean1 = x1.Mean();
-            double mean2 = x2.Mean();
-
-            // Compute the standard deviations
-            double standardDev1 = x1.StandardDeviation(mean1);
-            double standardDev2 = x2.StandardDeviation(mean2);
-        }
-
-        // Covariance: measure of relationship between two variables
-        double CovarianceForTwoLists(double[] x1, double[] x2)
-        {
-            double cov = x1.Covariance(x1);
-            return cov;
-        }
-
-        double[,] CovarianceForMatrix(double[,] x)
-        {
-            double[,] covarianceMatrix = x.Covariance();
-            return covarianceMatrix;
-        }
     }
 }
