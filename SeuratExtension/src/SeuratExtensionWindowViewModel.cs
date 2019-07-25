@@ -377,6 +377,15 @@ namespace SeuratExtension
             }
             //csv.AppendLine(header);
             csv.AppendLine("var metricsValues = [");
+            double[][] metrics = new double[toRun.solutions.Length][];
+            for (int i = 0; i < toRun.solutions.Length; ++i)
+            {
+                metrics[i] = new double[toRun.goals.Length];
+                for (int j = 0; j < toRun.goals.Length; j++)
+                {
+                    metrics[i][j] = Convert.ToDouble(toRun.solutions[i][j]);
+                }
+            }
             foreach (var solution in toRun.solutions) {
                 var newLine = "[";
                 for (int i = 0; i < toRun.goals.Length; i++)
