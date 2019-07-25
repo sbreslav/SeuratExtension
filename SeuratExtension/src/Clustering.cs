@@ -73,22 +73,22 @@ namespace SeuratExtension.src
 
             if (runTSNE2D)
             {
-                tSNE2D = runTSNE(refineryResults, 2);
+                tSNE2D = runTSNE(refineryResults, 2, 1.5);
 
                 // K-MEANS
                 var kMeans2D = getKMeansData(tSNE2D, clusters);
                 kMeansLabels2D = kMeans2D.Item1;
                 var rawkMeansPoints2D = kMeans2D.Item2;
-                kMeansPoints2D = runTSNE(rawkMeansPoints2D, 2);
+                kMeansPoints2D = runTSNE(rawkMeansPoints2D, 2, 0.2);
             }
 
             if (runTSNE3D)
             {
-                tSNE3D = runTSNE(refineryResults, 3);
+                tSNE3D = runTSNE(refineryResults, 3, 1.5);
                 var kMeans3D = getKMeansData(tSNE3D, clusters);
                 kMeansLabels3D = kMeans3D.Item1;
                 var rawkMeansPoints3d = kMeans3D.Item2;
-                kMeansPoints3D = runTSNE(rawkMeansPoints3d, 3);
+                kMeansPoints3D = runTSNE(rawkMeansPoints3d, 3, 0.2);
             }
 
         }
@@ -112,26 +112,26 @@ namespace SeuratExtension.src
             // run 2d or 3d only if selected
             if (runTSNE2D)
             {
-                tSNE2D = runTSNE(refineryResults, 2);
+                tSNE2D = runTSNE(refineryResults, 2, 1.5);
                 kMeansLabels2D = getLabelsForKMeansWithLabels(refineryResults, clusters, weights);
             }
 
             if (runTSNE3D)
             {
-                tSNE3D = runTSNE(refineryResults, 3);
+                tSNE3D = runTSNE(refineryResults, 3, 1.5);
                 kMeansLabels3D = getLabelsForKMeansWithLabels(refineryResults, clusters, weights);
             }
 
         }
 
         // TSNE 
-        double[][] runTSNE(double[][] observations, int outputDimension)
+        double[][] runTSNE(double[][] observations, int outputDimension, double perplexity)
         {
             // Create a new t-SNE algorithm 
             TSNE tSNE = new TSNE()
             {
                 NumberOfOutputs = outputDimension,
-                Perplexity = 1.5
+                Perplexity = perplexity
             };
 
             // Transform to a reduced dimensionality space
