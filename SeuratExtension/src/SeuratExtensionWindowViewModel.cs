@@ -375,21 +375,26 @@ namespace SeuratExtension
                 }
 
             }
-            csv.AppendLine(header);
+            //csv.AppendLine(header);
+            csv.AppendLine("var metricsValues = [");
             foreach (var solution in toRun.solutions) {
-                var newLine = "";
+                var newLine = "[";
                 for (int i = 0; i < toRun.goals.Length; i++)
                 {
+                    //newLine += "\"";
                     newLine += solution[i];
+                    //newLine += "\"";
                     if (i < toRun.goals.Length - 1)
                     {
                         newLine += ",";
                     }
-
                 }
+                newLine += "],";
                 csv.AppendLine(newLine);
             }
-            File.WriteAllText(_folder + "\\results.csv", csv.ToString());
+            csv.AppendLine("];");
+            File.WriteAllText(_folder + "\\metrics.js", csv.ToString());
+            //File.WriteAllText(_folder + "\\results.csv", csv.ToString());
             //SaveResults(data, _folder + "\\results.csv");
 
         }
