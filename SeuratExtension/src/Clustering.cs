@@ -20,10 +20,8 @@ namespace SeuratExtension.src
     public class Clustering
     {
         // Figure out generator!! 
-        //
         Random seed = new Random();
 
- 
         double[,] data =
         {
             // Hours (H)  Mark (M)
@@ -56,22 +54,52 @@ namespace SeuratExtension.src
 
         double[] weights = { 1, 0.1, 0.5, 0.3 };
 
-        public Clustering()
+
+        // This constructor calls tSNE dimnesionality reduction.
+        // After that is clusters the reduced data into provided number of clusters. 
+        public Clustering(double[][] refineryResults, bool runTSNE2D, bool runTSNE3D, int clusters)
         {
-            var tsne2D = runTSNE(observations, 2);
-            var tsne3d = runTSNE(observations, 3);
+            if (runTSNE2D)
+            {
+                var tsne2D = runTSNE(refineryResults, 2);
+                runKMeans(tsne2D, clusters);
+            }
 
-            // Run clustering on raw observation data
-            runKMeans(observations, 3);
-            runKMeansWithWeights(observations, 3, weights);
-
-            // Run clustering of data reduced into 3 dimensional space
-            runKMeans(tsne3d, 3);
-            runKMeansWithWeights(tsne3d, 3, weights);
+            if (runTSNE3D)
+            {
+                var tsne3d = runTSNE(refineryResults, 3);
+                runKMeans(tsne3d, clusters);
+            }
 
         }
 
+        // This constructor calls tSNE dimnesionality reduction.
+        // After that is clusters the reduced data into provided number of clusters. 
+        // The clusters are calculated based on provided weights. 
+        // If we want the specific parameter to be more important - we give higher parameter. 
+        // The weights could be the inputs in Dynamo?? 
+        public Clustering(double[][] refineryResults, bool runTSNE2D, bool runTSNE3D, int clusters, double[] weights)
+        {
+            if (refineryResults[0].Length != weights.Length)
+            {
+                throw new System.ArgumentException("Number of weights is not equal to number of parameters");
+            }
 
+            // run 2d or 3d only if selected
+            if (runTSNE2D)
+            {
+                var tsne2D = runTSNE(refineryResults, 2);
+                runKMeans(tsne2D, clusters);
+            }
+
+            if (runTSNE3D)
+            {
+                var tsne3d = runTSNE(refineryResults, 3);
+                runKMeans(tsne3d, clusters);
+                runKMeansWithWeights(refineryResults, clusters, weights);
+            }
+
+        }
 
         // Simpliest implementation of tsne for the 2d double array
         double[][] runTSNE(double[][] observations, int outputDimension)
@@ -106,10 +134,7 @@ namespace SeuratExtension.src
 
         void runKMeansWithWeights(double[][] observations, int numberOfClusters, double[] weights)
         {
-            if (observations[0].Length != weights.Length)
-            {
-                throw new System.ArgumentException("Number of weights is not equal to number of parameters");
-            }
+
 
             // Create a new K-Means algorithm
             KMeans kmeans = new KMeans(k: numberOfClusters)
