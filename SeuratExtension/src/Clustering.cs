@@ -22,21 +22,11 @@ namespace SeuratExtension.src
         // Figure out generator!! 
         Random seed = new Random();
 
-        double[,] data =
-        {
-            // Hours (H)  Mark (M)
-            { 2.5,  2.4 },
-            { 0.5,  0.7 },
-            { 2.2,  2.9 },
-            { 1.9,  2.2 },
-            { 3.1,  3.0 },
-            { 2.3,  2.7 },
-            { 2.0,  1.6 },
-            { 1.0,  1.1 },
-            { 1.5,  1.6 },
-            { 1.1,  0.9 },
-        }
-        ;
+        public double[][] tSNE2D;
+        public double[][] tSNE3D;
+
+        public int[] kMeansLabels2D;
+        public int[] kMeansLabels3D;
 
         // Declare some observations
         double[][] observations =
@@ -59,16 +49,22 @@ namespace SeuratExtension.src
         // After that is clusters the reduced data into provided number of clusters. 
         public Clustering(double[][] refineryResults, bool runTSNE2D, bool runTSNE3D, int clusters)
         {
+            tSNE2D = new double[refineryResults.Length][];
+            tSNE3D = new double[refineryResults.Length][];
+
+            kMeansLabels2D = new int[refineryResults.Length];
+            kMeansLabels3D = new int[refineryResults.Length];
+
             if (runTSNE2D)
             {
-                var tsne2D = runTSNE(refineryResults, 2);
-                runKMeans(tsne2D, clusters);
+                tSNE2D = runTSNE(refineryResults, 2);
+                kMeansLabels2D = getLabelsForKMeans(tSNE2D, clusters);
             }
 
             if (runTSNE3D)
             {
-                var tsne3d = runTSNE(refineryResults, 3);
-                runKMeans(tsne3d, clusters);
+                tSNE3D = runTSNE(refineryResults, 3);
+                kMeansLabels3D = getLabelsForKMeans(tSNE3D, clusters);
             }
 
         }
@@ -76,8 +72,6 @@ namespace SeuratExtension.src
         // This constructor calls tSNE dimnesionality reduction.
         // After that is clusters the reduced data into provided number of clusters. 
         // The clusters are calculated based on provided weights. 
-        // If we want the specific parameter to be more important - we give higher parameter. 
-        // The weights could be the inputs in Dynamo?? 
         public Clustering(double[][] refineryResults, bool runTSNE2D, bool runTSNE3D, int clusters, double[] weights)
         {
             if (refineryResults[0].Length != weights.Length)
@@ -85,18 +79,23 @@ namespace SeuratExtension.src
                 throw new System.ArgumentException("Number of weights is not equal to number of parameters");
             }
 
+            tSNE2D = new double[refineryResults.Length][];
+            tSNE3D = new double[refineryResults.Length][];
+
+            kMeansLabels2D = new int[refineryResults.Length];
+            kMeansLabels3D = new int[refineryResults.Length];
+
             // run 2d or 3d only if selected
             if (runTSNE2D)
             {
-                var tsne2D = runTSNE(refineryResults, 2);
-                runKMeans(tsne2D, clusters);
+                tSNE2D = runTSNE(refineryResults, 2);
+                kMeansLabels2D = getLabelsForKMeansWithLabels(refineryResults, clusters, weights);
             }
 
             if (runTSNE3D)
             {
-                var tsne3d = runTSNE(refineryResults, 3);
-                runKMeans(tsne3d, clusters);
-                runKMeansWithWeights(refineryResults, clusters, weights);
+                tSNE3D = runTSNE(refineryResults, 3);
+                kMeansLabels3D = getLabelsForKMeansWithLabels(refineryResults, clusters, weights);
             }
 
         }
@@ -120,7 +119,7 @@ namespace SeuratExtension.src
             return output;
         }
 
-        void runKMeans(double[][] observations, int numberOfClusters)
+        int[] getLabelsForKMeans(double[][] observations, int numberOfClusters)
         {
             // Create a new K-Means algorithm
             KMeans kmeans = new KMeans(k: numberOfClusters);
@@ -130,11 +129,13 @@ namespace SeuratExtension.src
 
             // Use the centroids to parition all the data
             int[] labels = clusters.Decide(observations);
+
+            return labels;
+
         }
 
-        void runKMeansWithWeights(double[][] observations, int numberOfClusters, double[] weights)
+        int[] getLabelsForKMeansWithLabels(double[][] observations, int numberOfClusters, double[] weights)
         {
-
 
             // Create a new K-Means algorithm
             KMeans kmeans = new KMeans(k: numberOfClusters)
@@ -149,6 +150,8 @@ namespace SeuratExtension.src
 
             // Use the centroids to parition all the data
             int[] labels = clusters.Decide(observations);
+
+            return labels;
         }
 
 

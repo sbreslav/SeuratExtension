@@ -4,6 +4,7 @@ using Dynamo.Extensions;
 using Dynamo.Graph.Nodes;
 using Dynamo.ViewModels;
 using Newtonsoft.Json;
+using SeuratExtension.src;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -386,6 +387,17 @@ namespace SeuratExtension
                     metrics[i][j] = Convert.ToDouble(toRun.solutions[i][j]);
                 }
             }
+
+            // Run tSNE and k-Means
+            Clustering clusteredData = new Clustering(metrics, true, true, 3);
+
+            var resultTSNE2D = clusteredData.tSNE2D;
+            var resultTSNE3D = clusteredData.tSNE3D;
+
+            var kMeansLabels2D = clusteredData.kMeansLabels2D;
+            var kMeansLabels3D = clusteredData.kMeansLabels3D;
+
+
             foreach (var solution in toRun.solutions) {
                 var newLine = "[";
                 for (int i = 0; i < toRun.goals.Length; i++)
