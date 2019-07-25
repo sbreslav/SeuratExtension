@@ -40,7 +40,7 @@ namespace SeuratExtension
             // You'll need these later when you want to use
             // the supplied workspaces
 
-            sampleMenuItem = new MenuItem { Header = "Show View Extension Sample Window" };
+            sampleMenuItem = new MenuItem { Header = "Seurat Extension" };
             sampleMenuItem.Click += (sender, args) =>
             {
                 var viewModel = new SeuratExtensionWindowViewModel(p);
