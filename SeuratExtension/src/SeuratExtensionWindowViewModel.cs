@@ -394,6 +394,16 @@ namespace SeuratExtension
             }
             csv.AppendLine("];");
             File.WriteAllText(_folder + "\\metrics.js", csv.ToString());
+
+            // Copy files
+            var fileNames = new string[] { "index.html", "playground.css", "playground.js", "vis-graph3d.min.js" };
+            foreach (var fileName in fileNames) {
+                var sourcePath = Environment.ExpandEnvironmentVariables("%appdata%\\Dynamo\\Dynamo Core\\2.2\\packages\\SeuratExtension\\extra");
+                string targetPath = _folder;
+                string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
+                string destFile = System.IO.Path.Combine(targetPath, fileName);
+                System.IO.File.Copy(sourceFile, destFile, true);
+            }
             //File.WriteAllText(_folder + "\\results.csv", csv.ToString());
             //SaveResults(data, _folder + "\\results.csv");
 
