@@ -397,6 +397,8 @@ namespace SeuratExtension
             var kMeansLabels2D = clusteredData.kMeansLabels2D;
             var kMeansLabels3D = clusteredData.kMeansLabels3D;
 
+            var kMeansCentroids2D = clusteredData.kMeansPoints2D;
+            var kMeansCentroids3D = clusteredData.kMeansPoints3D;
 
             foreach (var solution in toRun.solutions) {
                 var newLine = "[";
