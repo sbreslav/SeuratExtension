@@ -14,6 +14,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 //using System.Windows.Forms;
@@ -347,7 +348,7 @@ namespace SeuratExtension
 
         public async Task RunTasks(StudyInfo study, HallOfFame hof, HallOfFame complete)
         {
-            /*
+            
             if (hof == null && complete == null)
             {
                 return;
@@ -356,189 +357,41 @@ namespace SeuratExtension
 
             var toRun = (_useComplete && complete != null) ? complete : hof;
 
-            _folder = study.Folder + "\\screenshots";
+            _folder = study.Folder + "\\analysis";
             if (!System.IO.Directory.Exists(_folder))
             {
                 System.IO.Directory.CreateDirectory(_folder);
             }
 
-            // Shouldn't really be necessary
-
             _maxItems = toRun.solutions.Length;
-
-            if (
-              Start >= 0 && Start < _maxItems &&
-              Items >= 0 && Items <= _maxItems &&
-              Start + Items <= _maxItems
-            )
+            var csv = new StringBuilder();
+            var header = "";
+            for (int i = 0; i < toRun.goals.Length; i++)
             {
-                bool waiting = false;
-                int counter = Start;
-                var images = new Bitmap[_maxItems];
-                var errorImages = new Bitmap[_maxItems];
-                var runsWithErrors = new List<int>();
-                Progress = 0;
-                Escape = false;
-
-                // Pre-load any existing images that come before the chosen range, if this option was selected
-
-                if (_createAnimations && _loadImages && counter > 0)
+                header += toRun.goals[i];
+                if (i < toRun.goals.Length - 1)
                 {
-                    LoadExistingImages(images, _captureErrors ? errorImages : null, _folder, 0, counter);
+                    header += ",";
                 }
 
-                _previousRunType = _dynamoViewModel.HomeSpace.RunSettings.RunType;
-                _dynamoViewModel.HomeSpace.RunSettings.RunType = Dynamo.Models.RunType.Manual;
-
-                // Define and attach the main post-execution handler
-
-                ExecutionStateHandler postExecution =
-                  async (e) =>
-                  {
-                      DoEvents();
-                      await Task.Delay(3000);
-
-                      waiting = false;
-
-                      if (!_escapePressed)
-                      {
-                          var isError = false;
-                          if (_captureErrors)
-                          {
-                      // Does the graph contain any nodes in an error state?
-
-                      var errorNodes =
-                        (from n in _readyParams.CurrentWorkspaceModel.Nodes
-                           where n.State != ElementState.Active && n.State != ElementState.Dead
-                           select n);
-                              if (errorNodes.Count<NodeModel>() > 0)
-                              {
-                                  isError = true;
-                                  runsWithErrors.Add(counter);
-                              }
-                          }
-
-                          var img = SaveScreenshot(GetImageFilename(_folder, counter, isError));
-                          if (isError)
-                          {
-                              errorImages[counter] = img;
-                          }
-                          else
-                          {
-                              images[counter] = img;
-                          }
-
-                          counter++;
-
-                          var captured = counter - Start;
-                          Progress = 100 * captured / Items;
-                      }
-                  };
-
-                ExecutionEvents.GraphPostExecution += postExecution;
-
-                if (Items == 0)
+            }
+            csv.AppendLine(header);
+            foreach (var solution in toRun.solutions) {
+                var newLine = "";
+                for (int i = 0; i < toRun.goals.Length; i++)
                 {
-                    Progress = 100;
-                }
-                else
-                {
-                    var nodeMap = GetDynamoNodesForInputParameters(toRun.variables, _readyParams.CurrentWorkspaceModel.Nodes);
-
-                    for (int i = Start; i < Start + Items; i++)
+                    newLine += solution[i];
+                    if (i < toRun.goals.Length - 1)
                     {
-                        if (_escapePressed)
-                        {
-                            break;
-                        }
-
-                        var parameters = toRun.solutions[i];
-                        for (var j = 0; j < toRun.variables.Length; j++)
-                        {
-                            SetDynamoInputParameter(nodeMap, toRun.variables[j], parameters[toRun.goals.Length + j]);
-                        }
-
-                        waiting = true;
-
-                        StartDynamoRun();
-
-                        while (waiting)
-                        {
-                            await Task.Delay(1000);
-                        }
-                    }
-                }
-
-                _dynamoViewModel.HomeSpace.RunSettings.RunType = _previousRunType;
-
-                // Post-load any existing images that come after the chosen range, if this option was selected
-
-                if (_createAnimations && _loadImages && counter + 1 < _maxItems)
-                {
-                    LoadExistingImages(images, _captureErrors ? errorImages : null, _folder, counter + 1, _maxItems);
-                }
-
-                if (!_escapePressed)
-                {
-                    if (_createAnimations)
-                    {
-                        var levels = GetSortLevels();
-                        var order = GetSolutionOrder(toRun, levels);
-
-                        var rootName = StripInvalidFileAndPathCharacters(_rootName);
-
-                        if (!images.All<Bitmap>((b) => b == null))
-                        {
-                            SaveAnimation(images, order, _folder + "\\" + rootName + ".gif");
-                            SaveAnimation(images, order, _folder + "\\" + rootName + "-small.gif", 1000);
-                            SaveAnimation(images, order, _folder + "\\" + rootName + "-tiny.gif", 500);
-                        }
-
-                        if (!errorImages.All<Bitmap>((b) => b == null))
-                        {
-                            SaveAnimation(errorImages, order, _folder + "\\" + rootName + "-errors.gif");
-                            SaveAnimation(errorImages, order, _folder + "\\" + rootName + "-errors-small.gif", 1000);
-                            SaveAnimation(errorImages, order, _folder + "\\" + rootName + "-errors-tiny.gif", 500);
-                        }
+                        newLine += ",";
                     }
 
-                    // If errors were found in any of the runs, create a new run with just the problematic runs
-
-                    const string errorsSuffix = "-errors";
-                    if (_captureErrors && runsWithErrors.Count > 0 && !study.Folder.EndsWith(errorsSuffix))
-                    {
-                        SaveFilteredHallOfFame(study, study.Folder + errorsSuffix, runsWithErrors);
-                        OnPropertyChanged("RefineryTasks");
-                    }
                 }
+                csv.AppendLine(newLine);
+            }
+            File.WriteAllText(_folder + "\\results.csv", csv.ToString());
+            //SaveResults(data, _folder + "\\results.csv");
 
-                foreach (var image in images)
-                {
-                    if (image != null)
-                    {
-                        image.Dispose();
-                    }
-                }
-                foreach (var image in errorImages)
-                {
-                    if (image != null)
-                    {
-                        image.Dispose();
-                    }
-                }
-
-                DisableExecute(false);
-                ExecutionEvents.GraphPostExecution -= postExecution;
-
-                var result = MessageBox.Show("Capture complete. Copy output path to the clipboard?",
-                                              "Confirmation",
-                                              MessageBoxButton.YesNo,
-                                              MessageBoxImage.Question);
-                if (result == MessageBoxResult.Yes)
-                {
-                    Clipboard.SetText(_folder);
-                }
-            }*/
         }
 
         public string StripInvalidFileAndPathCharacters(string filename)
