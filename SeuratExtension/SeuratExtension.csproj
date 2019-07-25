@@ -108,6 +108,10 @@
     <ExtraFolder>$(PackageFolder)extra\</ExtraFolder>
     <DyfFolder>$(PackageFolder)dyf\</DyfFolder>
   </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>xcopy  /S /Y $(ProjectDir)src\html\*.*  $(ProjectDir)$(OutDir)
+xcopy /S /Y $(ProjectDir)src\html\*.* "%25appdata%25\Dynamo\Dynamo Core\2.2\packages\SeuratExtension\extra\"</PostBuildEvent>
+  </PropertyGroup>
   <Target Name="AfterBuild">
     <ItemGroup>
       <Dlls Include="$(OutDir)*.dll" />
