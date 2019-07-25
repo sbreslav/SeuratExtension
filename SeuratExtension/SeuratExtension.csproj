@@ -59,6 +59,9 @@
     <PackageReference Include="DynamoVisualProgramming.ZeroTouchLibrary" version="2.2.*">
       <ExcludeAssets>runtime</ExcludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Chart.Controls">
+      <Version>4.7.2046</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\SeuratExtensionViewExtension.cs" />
@@ -67,6 +70,7 @@
       <DependentUpon>SeuratExtensionWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StudyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="src\SeuratExtensionWindow.xaml">
