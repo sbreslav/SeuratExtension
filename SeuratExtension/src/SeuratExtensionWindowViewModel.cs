@@ -122,6 +122,7 @@ namespace SeuratExtension
         private int _maxItems;
         private int _maxHofItems;
         private int _maxCompleteItems;
+        private int _clusterCount;
         private double _progress;
         private bool _captureErrors;
         private bool _useComplete;
@@ -139,6 +140,16 @@ namespace SeuratExtension
         const string enableText = "Click here to launch a capture run. It may take some time, but can be canceled.";
         const string disableText = "Capture canceled; another can be started when current run completes.";
         public readonly string EmptyComboValue = "   ";
+
+        public int ClusterCount
+        {
+            get { return _clusterCount; }
+            set
+            {
+                _clusterCount = value;
+                OnPropertyChanged();
+            }
+        }
 
         public int Start
         {
@@ -289,6 +300,7 @@ namespace SeuratExtension
             _parameterList = new List<string>();
             _dispatcherUIThread = Dispatcher.CurrentDispatcher;
             SortLevels = new ObservableCollection<SortLevel>();
+            _clusterCount = 3;
         }
 
         public void Dispose()
