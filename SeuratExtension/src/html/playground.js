@@ -77,14 +77,25 @@ function getDataMetrics3D() {
 function getDataClusterStats2D() {
   var stats = averageClusterParameters2D;
   var dataStream = [];
+  var maxVals = {};
   for (var cat = 0; cat < stats.length; cat++) {
+    for (var i=0; i < stats[cat].length; i++){
+      if(!maxVals[i] || maxVals[i] < stats[cat][i]){
+        maxVals[i] = stats[cat][i];
+      }
+    }
+  }
+  for (var cat = 0; cat < stats.length; cat++) {
+    var maxVal = Math.max(stats[cat]);
+    
     dataStream.push({x:[], y:[],
       type: 'bar',
       name: 'Cluster '+ cat,
       });
-    for (var i=0; i < stats[cat].length; i++){
+    
+      for (var i=0; i < stats[cat].length; i++){
       dataStream[cat].x.push(allLabels[i]);
-      dataStream[cat].y.push(stats[cat][i]);
+      dataStream[cat].y.push(stats[cat][i]/ maxVals[i]);
     }
     
     //color.push(data3d[row][2]);
