@@ -26,6 +26,7 @@ namespace SeuratExtension.src
         public double[][] kMeansPoints2D;
         public double[][] kMeansPoints3D;
 
+        public double[][] averageClustersValues2D;
         public double[][] averageClustersValues3D;
 
         // Declare some observations
@@ -72,7 +73,7 @@ namespace SeuratExtension.src
 
         // This constructor calls tSNE dimnesionality reduction.
         // After that is clusters the reduced data into provided number of clusters. 
-        public Clustering(double[][] refineryResults, bool runTSNE2D, bool runTSNE3D, int clusters)
+        public Clustering(double[][] refineryResults, bool runTSNE2D, bool runTSNE3D, int clusters, double perplexity)
         {
             tSNE2D = new double[refineryResults.Length][];
             tSNE3D = new double[refineryResults.Length][];
@@ -85,18 +86,20 @@ namespace SeuratExtension.src
 
             if (runTSNE2D)
             {
-                tSNE2D = runTSNE(refineryResults, 2, 1.5);
+                tSNE2D = runTSNE(refineryResults, 2, perplexity);
 
                 // K-MEANS
                 var kMeans2D = getKMeansData(tSNE2D, clusters);
                 kMeansLabels2D = kMeans2D.Item1;
                 var rawkMeansPoints2D = kMeans2D.Item2;
                 kMeansPoints2D = runTSNE(rawkMeansPoints2D, 2, 0);
+                averageClustersValues2D = getAllClustersAverageValues(refineryResults, kMeansLabels3D, 3);
+
             }
 
             if (runTSNE3D)
             {
-                tSNE3D = runTSNE(refineryResults, 3, 1.5);
+                tSNE3D = runTSNE(refineryResults, 3, perplexity);
                 var kMeans3D = getKMeansData(tSNE3D, clusters);
                 kMeansLabels3D = kMeans3D.Item1;
                 var rawkMeansPoints3d = kMeans3D.Item2;
@@ -143,6 +146,7 @@ namespace SeuratExtension.src
             // Create a new t-SNE algorithm 
             TSNE tSNE = new TSNE()
             {
+                NumberOfInputs = 9,
                 NumberOfOutputs = outputDimension,
                 Perplexity = perplexity
             };
