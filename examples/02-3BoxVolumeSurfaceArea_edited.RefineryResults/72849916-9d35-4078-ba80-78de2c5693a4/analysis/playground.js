@@ -4,6 +4,12 @@ function load() {
   loadCsvColoredDotsExample();
   draw();
   
+
+  var layout = {barmode: 'group'};
+  var clusterStats2D = getDataClusterStats2D();
+  clusterStatsDiv = document.getElementById('clusterStats');
+  Plotly.newPlot(clusterStatsDiv, clusterStats2D, layout);
+
   var data2D = getDataMetrics2D();
   Graph2D = document.getElementById('2dGraph');
 	Plotly.plot( Graph2D, data2D, {
@@ -67,6 +73,25 @@ function getDataMetrics3D() {
   }
 
   return data;
+}
+function getDataClusterStats2D() {
+  var stats = averageClusterParameters2D;
+  var dataStream = [];
+  for (var cat = 0; cat < stats.length; cat++) {
+    dataStream.push({x:[], y:[],
+      type: 'bar',
+      name: 'Cluster '+ cat,
+      });
+    for (var i=0; i < stats[cat].length; i++){
+      dataStream[cat].x.push(allLabels[i]);
+      dataStream[cat].y.push(stats[cat][i]);
+    }
+    
+    //color.push(data3d[row][2]);
+    
+
+  }
+  return dataStream;
 }
 
 function getDataMetrics2D() {
