@@ -5,7 +5,7 @@ function load() {
   draw();
   
 
-  var layout = {barmode: 'group'};
+  var layout = {barmode: 'group', margin: { t: 0, l: 40}};
   var clusterStats2D = getDataClusterStats2D();
   clusterStatsDiv = document.getElementById('clusterStats');
   Plotly.newPlot(clusterStatsDiv, clusterStats2D, layout);
@@ -13,7 +13,7 @@ function load() {
   var data2D = getDataMetrics2D();
   Graph2D = document.getElementById('2dGraph');
 	Plotly.plot( Graph2D, data2D, {
-  margin: { t: 0 } } );
+  margin: { t: 0, b: 0 } } );
   
   Graph2D.on('plotly_click', function(data){
       var pts = '';

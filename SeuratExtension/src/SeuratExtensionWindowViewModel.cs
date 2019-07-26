@@ -300,7 +300,7 @@ namespace SeuratExtension
             _parameterList = new List<string>();
             _dispatcherUIThread = Dispatcher.CurrentDispatcher;
             SortLevels = new ObservableCollection<SortLevel>();
-            _clusterCount = 3;
+            _clusterCount = 5;
         }
 
         public void Dispose()
