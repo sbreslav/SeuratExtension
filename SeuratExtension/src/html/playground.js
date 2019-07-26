@@ -3,6 +3,18 @@ var query = null;
 function load() {
   loadCsvColoredDotsExample();
   draw();
+
+  Graph2D = document.getElementById('2dGraph');
+	Plotly.plot( Graph2D, [{
+  mode: 'markers',
+  type: 'scatter',
+  marker: {
+    size: 3
+    //color: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39]
+  },
+	x: [1, 2, 3, 4, 5],
+	y: [1, 2, 4, 8, 16] }], {
+	margin: { t: 0 } } );
 }
 
 function round(value, decimals) {
@@ -69,7 +81,7 @@ function getOptions() {
   var options = {
     tooltip: true,
     width: "100%",
-    height:    "100%",
+    height:    "500px",
     style:    "dot-color",
     showAnimationControls: false,
     showGrid:          true,
@@ -89,7 +101,7 @@ function getOptions() {
     legendLabel:        "class",
     xCenter:           "50%",
     yCenter:           "50%",
-    dotSizeRatio:      0.5,
+    dotSizeRatio:      0.0073,
     onclick: function(point){
       console.log("OnClick", point);
       var value = "id:" + point.id + "\n";
@@ -121,5 +133,5 @@ function drawCsv() {
   var options = getOptions();
 
   // Creat a graph
-  var graph = new vis.Graph3d(document.getElementById('graph'), data, options);
+  var graph = new vis.Graph3d(document.getElementById('3dGraph'), data, options);
 }
