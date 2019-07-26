@@ -50,11 +50,11 @@ namespace SeuratExtension.src
             // 2D
             tSNE2D = runTSNE(observations, 2, 1.5);
 
-            var kMeans2D = getKMeansData(tSNE2D, 3);
+            var kMeans2D = getKMeansData(observations, 3);
 
             kMeansLabels2D = kMeans2D.Item1;
-            //var rawkMeansPoints2D = kMeans2D.Item2;
-            //kMeansPoints3D = runTSNE(rawkMeansPoints2D, 2, 0.2);
+            var rawkMeansPoints2D = kMeans2D.Item2;
+            kMeansPoints2D = runTSNE(rawkMeansPoints2D, 2, 0);
 
             // 3D
             tSNE3D = runTSNE(observations, 3, 1.5);
@@ -64,8 +64,8 @@ namespace SeuratExtension.src
             kMeansLabels3D = kMeans3D.Item1;
             averageClustersValues3D = getAllClustersAverageValues(observations, kMeansLabels3D, 3);
 
-            //var rawkMeansPoints3D = kMeans3D.Item2;
-            //kMeansPoints3D = runTSNE(rawkMeansPoints3D, 3, 0.2);
+            var rawkMeansPoints3D = kMeans3D.Item2;
+            kMeansPoints3D = runTSNE(rawkMeansPoints3D, 3, 0);
         }
 
 
@@ -90,8 +90,8 @@ namespace SeuratExtension.src
                 // K-MEANS
                 var kMeans2D = getKMeansData(tSNE2D, clusters);
                 kMeansLabels2D = kMeans2D.Item1;
-                //var rawkMeansPoints2D = kMeans2D.Item2;
-                //kMeansPoints2D = runTSNE(rawkMeansPoints2D, 2, 0.2);
+                var rawkMeansPoints2D = kMeans2D.Item2;
+                kMeansPoints2D = runTSNE(rawkMeansPoints2D, 2, 0);
             }
 
             if (runTSNE3D)
@@ -99,8 +99,8 @@ namespace SeuratExtension.src
                 tSNE3D = runTSNE(refineryResults, 3, 1.5);
                 var kMeans3D = getKMeansData(tSNE3D, clusters);
                 kMeansLabels3D = kMeans3D.Item1;
-                //var rawkMeansPoints3d = kMeans3D.Item2;
-                //kMeansPoints3D = runTSNE(rawkMeansPoints3d, 3, 0.2);
+                var rawkMeansPoints3d = kMeans3D.Item2;
+                kMeansPoints3D = runTSNE(rawkMeansPoints3d, 3, 0);
                 averageClustersValues3D = getAllClustersAverageValues(refineryResults, kMeansLabels3D, 3);
             }
 
@@ -157,15 +157,6 @@ namespace SeuratExtension.src
             return output;
         }
 
-        double[][] copyData(double[][] data)
-        {
-            double[][] copied = data.Clone() as double[][];//new double[data.Length][];
-
-
-
-            return copied;
-        }
-
         Tuple<int[], double[][]> getKMeansData(double[][] observations, int numberOfClusters)
         {
             // Create a new K-Means algorithm
@@ -176,15 +167,17 @@ namespace SeuratExtension.src
 
             var overallCovariance = new List<double[]>();
 
-            //for (int i = 0; i < numberOfClusters; i++)
-            //{
-            //    var xD = kmeans.Clusters[i].Covariance;
-            //    var centroid = kmeans.Centroids[i];
+            for (int i = 0; i < numberOfClusters; i++)
+            {
+                var clusterPoints = kmeans.Clusters[i].Covariance;
+                var centroid = kmeans.Centroids[i];
 
-            //    overallCovariance.AddRange(xD);
-            //    //overallCovariance.AddRange(centroid);
+                // Add two arrays
+                var centroidWithClusterPonts = AddCentroidToClusters(clusterPoints, centroid);
 
-            //}
+                overallCovariance.AddRange(centroidWithClusterPonts);
+
+            }
 
             double[][] res = overallCovariance.ToArray();
 
@@ -193,6 +186,20 @@ namespace SeuratExtension.src
 
             return Tuple.Create(labels, res);
 
+        }
+
+        double[][] AddCentroidToClusters(double[][] cluster, double[] centroid)
+        {
+            double[][] sum = new double[cluster.Length + 1][];
+
+            for (int i = 0; i < cluster.Length; i++)
+            {
+                sum[i] = cluster[i];
+            }
+
+            sum[cluster.Length] = centroid;
+
+            return sum;
         }
 
         double[][] getAllClustersAverageValues(double[][] refineryData, int[] labeledData, int clusters)

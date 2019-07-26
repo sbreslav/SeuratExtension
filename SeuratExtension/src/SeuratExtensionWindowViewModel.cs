@@ -409,8 +409,8 @@ namespace SeuratExtension
             var kMeansLabels2D = clusteredData.kMeansLabels2D;
             var kMeansLabels3D = clusteredData.kMeansLabels3D;
 
-            var kMeansCentroids2D = clusteredData.kMeansPoints2D;
-            var kMeansCentroids3D = clusteredData.kMeansPoints3D;
+            var kMeansClusterPoints2D = clusteredData.kMeansPoints2D;
+            var kMeansCllusterPoints3D = clusteredData.kMeansPoints3D;
 
             // First dimension of this list is number of clusters. 
             // For every cluster there is average value of all points in the cluster for each parameter. 
