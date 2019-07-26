@@ -6,7 +6,7 @@ function load() {
   
   var data2D = getDataMetrics2D();
   Graph2D = document.getElementById('2dGraph');
-	Plotly.plot( Graph2D, [date2D], {
+	Plotly.plot( Graph2D, [data2D], {
 	margin: { t: 0 } } );
 }
 
