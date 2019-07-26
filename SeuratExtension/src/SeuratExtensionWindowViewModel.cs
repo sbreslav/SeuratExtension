@@ -441,7 +441,11 @@ namespace SeuratExtension
                     newLine += resultTSNE3D[i][j] + ",";
                 }
                 newLine += kMeansLabels3D[i];
-                newLine += "],";
+                newLine += "]";
+                if(i < resultTSNE3D.Length - 1)
+                {
+                    newLine += ",";
+                }
                 resultsData.AppendLine(newLine);
             }
             resultsData.AppendLine("];");
@@ -482,7 +486,11 @@ namespace SeuratExtension
                         newLine += ",";
                     }
                 }
-                newLine += "],";
+                newLine += "]";
+                if (i < toRun.solutions.Length - 1)
+                {
+                    newLine += ",";
+                }
                 resultsData.AppendLine(newLine);
             }
             resultsData.AppendLine("];");

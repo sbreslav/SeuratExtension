@@ -40,7 +40,7 @@ function getDataMetrics() {
       data.add({x:parseFloat(csvArray[row][0]),
         y:parseFloat(csvArray[row][1]),
         z:parseFloat(csvArray[row][2]),
-        style:parseInt(csvArray[row][3]),
+        style:parseFloat(csvArray[row][3]),
         id: row
       });
   
