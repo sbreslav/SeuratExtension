@@ -21,8 +21,6 @@ function load() {
                 value += allLabels[j] + ": " + allValues[data.points[i].pointIndex][j] + "\n";
               }
       }
-      alert('Closest point clicked:\n\n'+pts);
-      
       document.getElementById("detailArea").value = value;
   });
 }
