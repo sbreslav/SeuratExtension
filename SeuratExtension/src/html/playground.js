@@ -73,7 +73,7 @@ function getDataMetrics2D() {
 
   }
   var maxGroup = Math.max(color);
-  var c = color.map((val) => { return (val * 255) / maxGroup; })
+  var c = color; //.map((val) => { return (val * 255) / maxGroup; })
   var data = {
     mode: 'markers',
     type: 'scatter',
