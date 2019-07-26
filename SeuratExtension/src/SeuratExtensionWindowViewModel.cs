@@ -389,7 +389,7 @@ namespace SeuratExtension
 
             }
             //csv.AppendLine(header);
-            csv.AppendLine("var metricsValues = [");
+            csv.AppendLine("var metricsValues3D = [");
             double[][] metrics = new double[toRun.solutions.Length][];
             for (int i = 0; i < toRun.solutions.Length; ++i)
             {
@@ -409,8 +409,13 @@ namespace SeuratExtension
             var kMeansLabels2D = clusteredData.kMeansLabels2D;
             var kMeansLabels3D = clusteredData.kMeansLabels3D;
 
-            var kMeansCentroids2D = clusteredData.kMeansPoints2D;
-            var kMeansCentroids3D = clusteredData.kMeansPoints3D;
+            var kMeansClusterPoints2D = clusteredData.kMeansPoints2D;
+            var kMeansCllusterPoints3D = clusteredData.kMeansPoints3D;
+
+            // First dimension of this list is number of clusters. 
+            // For every cluster there is average value of all points in the cluster for each parameter. 
+            var averageClusterParameters = clusteredData.averageClustersValues3D;
+
 
             foreach (var solution in toRun.solutions) {
                 var newLine = "[";
@@ -431,18 +436,35 @@ namespace SeuratExtension
             File.WriteAllText(_folder + "\\metrics.js", csv.ToString());
 
             var resultsData = new StringBuilder();
-            resultsData.AppendLine("var metricsValues = [");
-            for (var i=0; i < resultTSNE3D.Length; i++)
+            resultsData.AppendLine("var metricsValues2D = [");
+            for (var i=0; i < resultTSNE2D.Length; i++)
+            {
+                var newLine = "[";
+                for (int j = 0; j < resultTSNE2D[i].Length; j++)
+                {
+                    newLine += resultTSNE2D[i][j] + ",";
+                }
+                newLine += kMeansLabels2D[i];
+                newLine += "]";
+                if(i < resultTSNE2D.Length - 1)
+                {
+                    newLine += ",";
+                }
+                resultsData.AppendLine(newLine);
+            }
+            resultsData.AppendLine("];");
+
+            resultsData.AppendLine("var metricsValues3D = [");
+            for (var i = 0; i < resultTSNE3D.Length; i++)
             {
                 var newLine = "[";
                 for (int j = 0; j < resultTSNE3D[i].Length; j++)
                 {
-                    //newLine += "\"";
                     newLine += resultTSNE3D[i][j] + ",";
                 }
                 newLine += kMeansLabels3D[i];
                 newLine += "]";
-                if(i < resultTSNE3D.Length - 1)
+                if (i < resultTSNE3D.Length - 1)
                 {
                     newLine += ",";
                 }
