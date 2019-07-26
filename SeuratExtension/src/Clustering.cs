@@ -101,6 +101,7 @@ namespace SeuratExtension.src
                 kMeansLabels3D = kMeans3D.Item1;
                 //var rawkMeansPoints3d = kMeans3D.Item2;
                 //kMeansPoints3D = runTSNE(rawkMeansPoints3d, 3, 0.2);
+                averageClustersValues3D = getAllClustersAverageValues(refineryResults, kMeansLabels3D, 3);
             }
 
         }
