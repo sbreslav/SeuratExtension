@@ -14,15 +14,13 @@ function load() {
       console.log(data);
       var value = "";
       for(var i=0; i < data.points.length; i++){
-              value += "id:" + data.points[i].z + "\n";
+              value += "id:" + data.points[i].pointIndex + "\n";
               value += "X:" + data.points[i].x + "\n";
               value += "Y:" + data.points[i].y + "\n";
-              for(var i=0; i < allLabels.length; i++){
-                value += allLabels[i] + ": " + allValues[data.points[i].z][i] + "\n";
+              for(var j=0; j < allLabels.length; j++){
+                value += allLabels[j] + ": " + allValues[data.points[i].pointIndex][j] + "\n";
               }
       }
-      alert('Closest point clicked:\n\n'+pts);
-      
       document.getElementById("detailArea").value = value;
   });
 }
