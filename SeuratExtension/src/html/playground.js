@@ -59,14 +59,18 @@ function getDataMetrics3D() {
   //if (document.getElementById("filterLabel").value != "" && document.getElementById("legendLabel").value == "") {
   //  skipValue = true;
   //}
-
+  var cols = ["#256B49",
+  "#7EAA5F",
+  "#D5B553",
+  "#F97E6A",
+  "#D24854"];
   // read all data
   for (var row = 0; row < data3d.length; row++) {
     
       data.add({x:parseFloat(data3d[row][0]),
         y:parseFloat(data3d[row][1]),
         z:parseFloat(data3d[row][2]),
-        style:parseInt(data3d[row][3]),
+        style:cols[parseInt(data3d[row][3])],
         id: row
       });
   
@@ -227,6 +231,7 @@ function getOptions() {
     legendLabel:        "cluster",
     xCenter:           "50%",
     yCenter:           "50%",
+    //dataColor:  ['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99'],
     dotSizeRatio:      0.0073,
     onclick: function(point){
       console.log("OnClick", point);
