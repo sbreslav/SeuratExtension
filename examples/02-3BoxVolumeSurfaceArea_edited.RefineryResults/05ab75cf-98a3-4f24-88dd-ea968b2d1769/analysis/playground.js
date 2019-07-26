@@ -87,9 +87,9 @@ function getOptions() {
     zLabel:             "z",
     filterLabel:        "",
     legendLabel:        "class",
-    xCenter:           "50%",
-    yCenter:           "50%",
-    dotSizeRatio:      0.5,
+    xCenter:           "55%",
+    yCenter:           "45%",
+    dotSizeRatio:      0.0072,
     onclick: function(point){
       console.log("OnClick", point);
       var value = "id:" + point.id + "\n";
