@@ -412,6 +412,11 @@ namespace SeuratExtension
             var kMeansCentroids2D = clusteredData.kMeansPoints2D;
             var kMeansCentroids3D = clusteredData.kMeansPoints3D;
 
+            // First dimension of this list is number of clusters. 
+            // For every cluster there is average value of all points in the cluster for each parameter. 
+            var averageClusterParameters = clusteredData.averageClustersValues3D;
+
+
             foreach (var solution in toRun.solutions) {
                 var newLine = "[";
                 for (int i = 0; i < toRun.goals.Length; i++)
