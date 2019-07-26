@@ -40,7 +40,7 @@ function getDataMetrics() {
       data.add({x:parseFloat(csvArray[row][0]),
         y:parseFloat(csvArray[row][1]),
         z:parseFloat(csvArray[row][2]),
-        style:parseFloat(csvArray[row][3]),
+        style:parseInt(csvArray[row][3]),
         id: row
       });
   
@@ -65,7 +65,7 @@ function getDataDatasource() {
 /**
  * Retrieve a JSON object with all options
  */
-function getOptions(data) {
+function getOptions() {
   var options = {
     tooltip: true,
     width: "100%",
@@ -89,7 +89,9 @@ function getOptions(data) {
     legendLabel:        "class",
     xCenter:           "55%",
     yCenter:           "45%",
+    dotSizeRatio:      0.0072,
     onclick: function(point){
+      console.log("OnClick", point);
       var value = "id:" + point.id + "\n";
       value += "X:" + point.x + "\n";
       value += "Y:" + point.y + "\n";
@@ -98,7 +100,7 @@ function getOptions(data) {
         value += allLabels[i] + ": " + allValues[point.id][i] + "\n";
       }
       document.getElementById("detailArea").value = value;
-      console.log("OnClick", point);
+      
     }
   };
 
