@@ -93,7 +93,7 @@ namespace SeuratExtension.src
                 kMeansLabels2D = kMeans2D.Item1;
                 var rawkMeansPoints2D = kMeans2D.Item2;
                 kMeansPoints2D = runTSNE(rawkMeansPoints2D, 2, 0);
-                averageClustersValues2D = getAllClustersAverageValues(refineryResults, kMeansLabels3D, 3);
+                averageClustersValues2D = getAllClustersAverageValues(refineryResults, kMeansLabels2D, clusters);
 
             }
 
@@ -104,7 +104,7 @@ namespace SeuratExtension.src
                 kMeansLabels3D = kMeans3D.Item1;
                 var rawkMeansPoints3d = kMeans3D.Item2;
                 kMeansPoints3D = runTSNE(rawkMeansPoints3d, 3, 0);
-                averageClustersValues3D = getAllClustersAverageValues(refineryResults, kMeansLabels3D, 3);
+                averageClustersValues3D = getAllClustersAverageValues(refineryResults, kMeansLabels3D, clusters);
             }
 
         }
