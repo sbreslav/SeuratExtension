@@ -78,6 +78,21 @@ function getDataClusterStats2D() {
   var stats = averageClusterParameters2D;
   var dataStream = [];
   var maxVals = {};
+  col = [[37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84],
+    [37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84],
+    [37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84]];
   for (var cat = 0; cat < stats.length; cat++) {
     for (var i=0; i < stats[cat].length; i++){
       if(!maxVals[i] || maxVals[i] < stats[cat][i]){
@@ -91,11 +106,16 @@ function getDataClusterStats2D() {
     dataStream.push({x:[], y:[],
       type: 'bar',
       name: 'Cluster '+ cat,
+      marker: {}
       });
     
       for (var i=0; i < stats[cat].length; i++){
       dataStream[cat].x.push(allLabels[i]);
       dataStream[cat].y.push(stats[cat][i]/ maxVals[i]);
+    }
+
+    if(cat < 5){
+      dataStream[cat].marker.color = 'rgb('+col[cat][0]+','+col[cat][1]+','+col[cat][2]+')';
     }
     
     //color.push(data3d[row][2]);
@@ -114,7 +134,21 @@ function getDataMetrics2D() {
   //var x = [];
   //var y = []; 
   var dataStream = [];
-
+  col = [[37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84],
+    [37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84],
+    [37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84]];
   // read all data
   for (var row = 0; row < data3d.length; row++) {
     var cat = data3d[row][2];
@@ -124,9 +158,12 @@ function getDataMetrics2D() {
       type: 'scatter',
       name: 'Cluster '+ len,
       marker: {
-        size: 3,
+        size: 3
       }});
       len++;
+    }
+    if(cat < 5){
+      dataStream[cat].marker.color = 'rgb('+col[cat][0]+','+col[cat][1]+','+col[cat][2]+')';
     }
     dataStream[cat].x.push(data3d[row][0]);
     dataStream[cat].y.push(data3d[row][1]);
@@ -178,7 +215,7 @@ function getOptions() {
     showYAxis:         true,
     showZAxis:         true,
     showPerspective:   true,
-    showLegend:        true,
+    showLegend:        false,
     showShadow:        false,
     keepAspectRatio:   true,
     verticalRatio:      1.0,
@@ -187,7 +224,7 @@ function getOptions() {
     yLabel:             "y",
     zLabel:             "z",
     filterLabel:        "",
-    legendLabel:        "class",
+    legendLabel:        "cluster",
     xCenter:           "50%",
     yCenter:           "50%",
     dotSizeRatio:      0.0073,
