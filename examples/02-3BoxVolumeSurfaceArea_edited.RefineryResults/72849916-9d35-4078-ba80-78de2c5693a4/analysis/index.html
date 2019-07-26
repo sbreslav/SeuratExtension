@@ -6,6 +6,7 @@
     <title>Seurat Extension Visualization</title>
 <script type="text/javascript" src="results.js"></script>
     <script type="text/javascript" src="vis-graph3d.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script type="text/javascript" src="playground.js"></script>
     <link rel='stylesheet' href='playground.css' type='text/css'>
 	
@@ -34,12 +35,14 @@
             <input type="button" value="Draw graph" onclick="draw();" id="draw">
         </p>-->
 
-        <div id="graph"></div>
+        <div id="3dGraph"></div>
+        <div id="2dGraph" style="width:600px;height:450px;"></div>
     </td>
 </tr>
 <tr>
     <td>
-        <h2>Details</h2>
+        <h2>Statistics</h2>
+        <div id="clusterStats"></div>
         <textarea id="detailArea" rows="15" cols="50">
             
         </textarea>

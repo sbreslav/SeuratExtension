@@ -401,7 +401,7 @@ namespace SeuratExtension
             }
 
             // Run tSNE and k-Means
-            Clustering clusteredData = new Clustering(metrics, true, true, _clusterCount);
+            Clustering clusteredData = new Clustering(metrics, true, true, _clusterCount, 1.5);
 
             var resultTSNE2D = clusteredData.tSNE2D;
             var resultTSNE3D = clusteredData.tSNE3D;
@@ -414,7 +414,8 @@ namespace SeuratExtension
 
             // First dimension of this list is number of clusters. 
             // For every cluster there is average value of all points in the cluster for each parameter. 
-            var averageClusterParameters = clusteredData.averageClustersValues3D;
+            var averageClusterParameters3D = clusteredData.averageClustersValues3D;
+            var averageClusterParameters2D = clusteredData.averageClustersValues2D;
 
 
             foreach (var solution in toRun.solutions) {
@@ -447,6 +448,27 @@ namespace SeuratExtension
                 newLine += kMeansLabels2D[i];
                 newLine += "]";
                 if(i < resultTSNE2D.Length - 1)
+                {
+                    newLine += ",";
+                }
+                resultsData.AppendLine(newLine);
+            }
+            resultsData.AppendLine("];");
+
+            resultsData.AppendLine("var averageClusterParameters2D = [");
+            for (var i = 0; i < averageClusterParameters2D.Length; i++)
+            {
+                var newLine = "[";
+                for (int j = 0; j < averageClusterParameters2D[i].Length; j++)
+                {
+                    newLine += averageClusterParameters2D[i][j];
+                    if (j < averageClusterParameters2D[i].Length - 1)
+                    {
+                        newLine += ",";
+                    }
+                }
+                newLine += "]";
+                if (i < averageClusterParameters2D.Length - 1)
                 {
                     newLine += ",";
                 }
