@@ -5,7 +5,7 @@ function load() {
   draw();
   
 
-  var layout = {barmode: 'group'};
+  var layout = {barmode: 'group', margin: { t: 0, l: 40}};
   var clusterStats2D = getDataClusterStats2D();
   clusterStatsDiv = document.getElementById('clusterStats');
   Plotly.newPlot(clusterStatsDiv, clusterStats2D, layout);
@@ -13,13 +13,18 @@ function load() {
   var data2D = getDataMetrics2D();
   Graph2D = document.getElementById('2dGraph');
 	Plotly.plot( Graph2D, data2D, {
-  margin: { t: 0 } } );
+  margin: { t: 0, b: 0 } } );
+
+  var data2D_2 = getVectorDataMetrics2D();
+  Graph2DVector = document.getElementById('2dVectorGraph');
+	Plotly.plot( Graph2DVector, data2D_2, {
+  margin: { t: 0, b: 0 } } );
   
   Graph2D.on('plotly_click', function(data){
       var pts = '';
       console.log(data);
       var value = "";
-      for(var i=0; i < data.points.length; i++){
+      for(var i=0; i < 1; i++){ //data.points.length; i++){
               value += "id:" + data.points[i].pointIndex + "\n";
               value += "X:" + data.points[i].x + "\n";
               value += "Y:" + data.points[i].y + "\n";
@@ -59,14 +64,18 @@ function getDataMetrics3D() {
   //if (document.getElementById("filterLabel").value != "" && document.getElementById("legendLabel").value == "") {
   //  skipValue = true;
   //}
-
+  var cols = ["#256B49",
+  "#7EAA5F",
+  "#D5B553",
+  "#F97E6A",
+  "#D24854"];
   // read all data
   for (var row = 0; row < data3d.length; row++) {
     
       data.add({x:parseFloat(data3d[row][0]),
         y:parseFloat(data3d[row][1]),
         z:parseFloat(data3d[row][2]),
-        style:parseInt(data3d[row][3]),
+        style:cols[parseInt(data3d[row][3])],
         id: row
       });
   
@@ -77,20 +86,98 @@ function getDataMetrics3D() {
 function getDataClusterStats2D() {
   var stats = averageClusterParameters2D;
   var dataStream = [];
+  var maxVals = {};
+  col = [[37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84],
+    [37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84],
+    [37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84]];
   for (var cat = 0; cat < stats.length; cat++) {
+    for (var i=0; i < stats[cat].length; i++){
+      if(!maxVals[i] || maxVals[i] < stats[cat][i]){
+        maxVals[i] = stats[cat][i];
+      }
+    }
+  }
+  for (var cat = 0; cat < stats.length; cat++) {
+    var maxVal = Math.max(stats[cat]);
+    
     dataStream.push({x:[], y:[],
       type: 'bar',
       name: 'Cluster '+ cat,
+      marker: {}
       });
-    for (var i=0; i < stats[cat].length; i++){
+    
+      for (var i=0; i < stats[cat].length; i++){
       dataStream[cat].x.push(allLabels[i]);
-      dataStream[cat].y.push(stats[cat][i]);
+      dataStream[cat].y.push(stats[cat][i]/ maxVals[i]);
+    }
+
+    if(cat < 5){
+      dataStream[cat].marker.color = 'rgb('+col[cat][0]+','+col[cat][1]+','+col[cat][2]+')';
     }
     
     //color.push(data3d[row][2]);
     
 
   }
+  return dataStream;
+}
+
+function getVectorDataMetrics2D() {
+  var labels = allGoals;
+  var data = allValues;
+  var dataStream = [];
+  var angle = (2* Math.PI) / labels.length;
+  var vecX = [];
+  var vecY = [];
+  var a = 0;
+  
+
+  dataStream.push({x:[], y:[], text:[],
+    mode: 'markers',
+    type: 'scatter',
+    name: 'Metrics',
+    marker: { size: 10 }
+    });
+  for (var i=0; i <  labels.length; ++i){
+    a = a+angle;
+    dataStream[0].x.push(Math.cos(a));
+    dataStream[0].y.push(Math.sin(a));
+    dataStream[0].text.push(labels[i]);
+
+  }
+
+  dataStream.push({x:[], y:[],
+    mode: 'markers',
+    type: 'scatter',
+    name: 'Data',
+    marker: { size: 3 }
+    });
+
+    for (var i=0; i <  data.length; ++i){
+      var x = 0;
+      var y = 0;
+      for (var j=0; j < labels.length; j++){
+        x += data[i][j] * dataStream[0].x[j];
+        y += data[i][j] * dataStream[0].y[j];
+      }
+      x /= labels.length;
+      y /= labels.length;
+
+      dataStream[1].x.push(x);
+      dataStream[1].y.push(y);
+    }
   return dataStream;
 }
 
@@ -103,7 +190,21 @@ function getDataMetrics2D() {
   //var x = [];
   //var y = []; 
   var dataStream = [];
-
+  col = [[37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84],
+    [37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84],
+    [37, 107, 73],
+    [126, 170, 95],
+    [213, 181, 83],
+    [249, 126, 106],
+    [210, 72, 84]];
   // read all data
   for (var row = 0; row < data3d.length; row++) {
     var cat = data3d[row][2];
@@ -113,9 +214,12 @@ function getDataMetrics2D() {
       type: 'scatter',
       name: 'Cluster '+ len,
       marker: {
-        size: 3,
+        size: 3
       }});
       len++;
+    }
+    if(cat < 5){
+      dataStream[cat].marker.color = 'rgb('+col[cat][0]+','+col[cat][1]+','+col[cat][2]+')';
     }
     dataStream[cat].x.push(data3d[row][0]);
     dataStream[cat].y.push(data3d[row][1]);
@@ -167,7 +271,7 @@ function getOptions() {
     showYAxis:         true,
     showZAxis:         true,
     showPerspective:   true,
-    showLegend:        true,
+    showLegend:        false,
     showShadow:        false,
     keepAspectRatio:   true,
     verticalRatio:      1.0,
@@ -176,9 +280,10 @@ function getOptions() {
     yLabel:             "y",
     zLabel:             "z",
     filterLabel:        "",
-    legendLabel:        "class",
+    legendLabel:        "cluster",
     xCenter:           "50%",
     yCenter:           "50%",
+    //dataColor:  ['#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99'],
     dotSizeRatio:      0.0073,
     onclick: function(point){
       console.log("OnClick", point);

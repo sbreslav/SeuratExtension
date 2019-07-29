@@ -494,6 +494,18 @@ namespace SeuratExtension
             }
             resultsData.AppendLine("];");
 
+            resultsData.AppendLine("var allGoals = [");
+            var newLine0 = "";
+            for (int j = 0; j < toRun.goals.Length; j++)
+            {
+                newLine0 += "\"";
+                newLine0 += toRun.goals[j];
+                newLine0 += "\",";
+
+            }
+            resultsData.AppendLine(newLine0);
+            resultsData.AppendLine("];");
+
             resultsData.AppendLine("var allLabels = [");
             var newLine1 = "";
             for (int j = 0; j < toRun.goals.Length; j++)
