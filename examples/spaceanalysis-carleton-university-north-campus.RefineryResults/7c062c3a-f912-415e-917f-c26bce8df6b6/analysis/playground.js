@@ -22,7 +22,7 @@ function load() {
   
   Graph2D.on('plotly_click', function(data){
       var pts = '';
-      console.log(data);
+      //console.log(data);
       var value = "";
       for(var i=0; i < 1; i++){ //data.points.length; i++){
               value += "id:" + data.points[i].pointIndex + "\n";
@@ -34,6 +34,21 @@ function load() {
       }
       document.getElementById("detailArea").value = value;
   });
+
+  Graph2DVector.on('plotly_click', function(data){
+    var pts = '';
+    //console.log(data);
+    var value = "";
+    for(var i=0; i < 1; i++){ //data.points.length; i++){
+            value += "id:" + data.points[i].pointIndex + "\n";
+            value += "X:" + data.points[i].x + "\n";
+            value += "Y:" + data.points[i].y + "\n";
+            for(var j=0; j < allLabels.length; j++){
+              value += allLabels[j] + ": " + allValues[data.points[i].pointIndex][j] + "\n";
+            }
+    }
+    document.getElementById("detailArea").value = value;
+});
 }
 
 function round(value, decimals) {
@@ -181,8 +196,8 @@ function getVectorDataMetrics2D() {
         x += (data[i2][j2] / maxVals[j2]) * dataStream[0].x[j2];
         y += (data[i2][j2] / maxVals[j2]) * dataStream[0].y[j2];
       }
-      //x /= labels.length;
-      //y /= labels.length;
+      x /= labels.length;
+      y /= labels.length;
 
       dataStream[1].x.push(x);
       dataStream[1].y.push(y);
