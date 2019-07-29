@@ -22,7 +22,7 @@ function load() {
   
   Graph2D.on('plotly_click', function(data){
       var pts = '';
-      console.log(data);
+      //console.log(data);
       var value = "";
       for(var i=0; i < 1; i++){ //data.points.length; i++){
               value += "id:" + data.points[i].pointIndex + "\n";
@@ -34,6 +34,21 @@ function load() {
       }
       document.getElementById("detailArea").value = value;
   });
+
+  Graph2DVector.on('plotly_click', function(data){
+    var pts = '';
+    //console.log(data);
+    var value = "";
+    for(var i=0; i < 1; i++){ //data.points.length; i++){
+            value += "id:" + data.points[i].pointIndex + "\n";
+            value += "X:" + data.points[i].x + "\n";
+            value += "Y:" + data.points[i].y + "\n";
+            for(var j=0; j < allLabels.length; j++){
+              value += allLabels[j] + ": " + allValues[data.points[i].pointIndex][j] + "\n";
+            }
+    }
+    document.getElementById("detailArea").value = value;
+});
 }
 
 function round(value, decimals) {
@@ -166,20 +181,20 @@ function getVectorDataMetrics2D() {
     });
 
     var maxVals = {};
-    for (var i=0; i <  data.length; ++i){
+    for (var i1=0; i1 <  data.length; ++i1){
       for (var j=0; j < labels.length; j++){
-        if(!maxVals[i] || maxVals[i] < data[i][j]){
-          maxVals[i] = data[i][j];
+        if(!maxVals[j] || maxVals[j] < data[i1][j]){
+          maxVals[j] = data[i1][j];
         }
       }
     }
 
-    for (var i=0; i <  data.length; ++i){
+    for (var i2=0; i2 <  data.length; ++i2){
       var x = 0;
       var y = 0;
-      for (var j=0; j < labels.length; j++){
-        x += (data[i][j] / maxVals[i]) * dataStream[0].x[j] * (1/labels.length);
-        y += (data[i][j] / maxVals[i]) * dataStream[0].y[j] * (1/labels.length);
+      for (var j2=0; j2 < labels.length; j2++){
+        x += (data[i2][j2] / maxVals[j2]) * dataStream[0].x[j2];
+        y += (data[i2][j2] / maxVals[j2]) * dataStream[0].y[j2];
       }
       //x /= labels.length;
       //y /= labels.length;

@@ -165,15 +165,24 @@ function getVectorDataMetrics2D() {
     marker: { size: 3 }
     });
 
-    for (var i=0; i <  data.length; ++i){
+    var maxVals = {};
+    for (var i1=0; i1 <  data.length; ++i1){
+      for (var j=0; j < labels.length; j++){
+        if(!maxVals[j] || maxVals[j] < data[i1][j]){
+          maxVals[j] = data[i1][j];
+        }
+      }
+    }
+
+    for (var i2=0; i2 <  data.length; ++i2){
       var x = 0;
       var y = 0;
-      for (var j=0; j < labels.length; j++){
-        x += data[i][j] * dataStream[0].x[j];
-        y += data[i][j] * dataStream[0].y[j];
+      for (var j2=0; j2 < labels.length; j2++){
+        x += (data[i2][j2] / maxVals[j2]) * dataStream[0].x[j2];
+        y += (data[i2][j2] / maxVals[j2]) * dataStream[0].y[j2];
       }
-      x /= labels.length;
-      y /= labels.length;
+      //x /= labels.length;
+      //y /= labels.length;
 
       dataStream[1].x.push(x);
       dataStream[1].y.push(y);
