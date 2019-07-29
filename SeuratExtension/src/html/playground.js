@@ -196,8 +196,8 @@ function getVectorDataMetrics2D() {
         x += (data[i2][j2] / maxVals[j2]) * dataStream[0].x[j2];
         y += (data[i2][j2] / maxVals[j2]) * dataStream[0].y[j2];
       }
-      //x /= labels.length;
-      //y /= labels.length;
+      x /= labels.length;
+      y /= labels.length;
 
       dataStream[1].x.push(x);
       dataStream[1].y.push(y);

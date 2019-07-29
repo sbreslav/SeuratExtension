@@ -14,6 +14,11 @@ function load() {
   Graph2D = document.getElementById('2dGraph');
 	Plotly.plot( Graph2D, data2D, {
   margin: { t: 0, b: 0 } } );
+
+  var data2D_2 = getVectorDataMetrics2D();
+  Graph2DVector = document.getElementById('2dVectorGraph');
+	Plotly.plot( Graph2DVector, data2D_2, {
+  margin: { t: 0, b: 0 } } );
   
   Graph2D.on('plotly_click', function(data){
       var pts = '';
@@ -126,6 +131,62 @@ function getDataClusterStats2D() {
     
 
   }
+  return dataStream;
+}
+
+function getVectorDataMetrics2D() {
+  var labels = allGoals;
+  var data = allValues;
+  var dataStream = [];
+  var angle = (2* Math.PI) / labels.length;
+  var vecX = [];
+  var vecY = [];
+  var a = 0;
+  
+
+  dataStream.push({x:[], y:[], text:[],
+    mode: 'markers',
+    type: 'scatter',
+    name: 'Metrics',
+    marker: { size: 10 }
+    });
+  for (var i=0; i <  labels.length; ++i){
+    a = a+angle;
+    dataStream[0].x.push(Math.cos(a));
+    dataStream[0].y.push(Math.sin(a));
+    dataStream[0].text.push(labels[i]);
+
+  }
+
+  dataStream.push({x:[], y:[],
+    mode: 'markers',
+    type: 'scatter',
+    name: 'Data',
+    marker: { size: 3 }
+    });
+
+    var maxVals = {};
+    for (var i1=0; i1 <  data.length; ++i1){
+      for (var j=0; j < labels.length; j++){
+        if(!maxVals[j] || maxVals[j] < data[i1][j]){
+          maxVals[j] = data[i1][j];
+        }
+      }
+    }
+
+    for (var i2=0; i2 <  data.length; ++i2){
+      var x = 0;
+      var y = 0;
+      for (var j2=0; j2 < labels.length; j2++){
+        x += (data[i2][j2] / maxVals[j2]) * dataStream[0].x[j2];
+        y += (data[i2][j2] / maxVals[j2]) * dataStream[0].y[j2];
+      }
+      //x /= labels.length;
+      //y /= labels.length;
+
+      dataStream[1].x.push(x);
+      dataStream[1].y.push(y);
+    }
   return dataStream;
 }
 
