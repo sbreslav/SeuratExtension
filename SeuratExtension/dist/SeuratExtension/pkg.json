@@ -1,18 +1,18 @@
 ﻿{
-  "license": "",
+  "license": "MIT",
   "file_hash": null,
   "name": "SeuratExtension",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "Seurat takes a specific Refinery run results values, a set of points in a high-dimensional space, and finds a faithful representation of those points in a lower-dimensional space in 3 axis. This is achieved by first dimensionality reduction and then clustering. There's no output (dimensions) limit, how cool is that?",
   "group": "",
-  "keywords": "dimensionality reduction clustering refinery",
+  "keywords": "dimensionality reduction clustering visualization generative design",
   "dependencies": [],
   "contents": "",
   "engine_version": "2.2",
   "engine": "dynamo",
   "engine_metadata": "",
-  "site_url": "",
-  "repository_url": "",
+  "site_url": "https://github.com/sbreslav/SeuratExtension",
+  "repository_url": "https://github.com/sbreslav/SeuratExtension",
   "contains_binaries": true,
   "node_libraries": [
     
