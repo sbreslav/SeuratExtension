@@ -1,0 +1,54 @@
+
+<!doctype html>
+<html>
+
+<head>
+    <title>Seurat Extension Visualization</title>
+<script type="text/javascript" src="results.js"></script>
+    <script type="text/javascript" src="vis-graph3d.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="playground.js"></script>
+    <link rel='stylesheet' href='playground.css' type='text/css'>
+	
+    <script type="text/javascript">
+        // Called when the Visualization API is loaded.
+		
+		loadCsvColoredDotsExample();
+       
+    </script>
+    
+</head>
+
+<body onload="load();">
+
+<h1>Seurat Extension Visualization</h1>
+
+<table style="width:100%;">
+<col width="55%">
+<col width="45%">
+
+<tr>
+    
+    <td rowspan=2>
+        <h2>Graph</h2>
+        <!--<p>
+            <input type="button" value="Draw graph" onclick="draw();" id="draw">
+        </p>-->
+        <div id="2dGraph" style="width:700px;height:450px;padding-bottom: 3px;"></div>
+        <div id="3dGraph"></div>
+        
+    </td>
+</tr>
+<tr>
+    <td>
+        <h2>Statistics</h2>
+        <div id="clusterStats"></div>
+        <textarea id="detailArea" rows="20" style="margin:50px;" cols="50">
+            
+        </textarea>
+        <div id="2dVectorGraph" style="width:700px;height:450px;padding-bottom: 3px;"></div>
+    </td>
+</tr>
+</table>
+
+</body>

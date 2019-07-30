@@ -35,17 +35,17 @@ namespace SeuratExtension
                 // Display the options pane with automatic height
 
                 TaskOptions.Visibility = Visibility.Visible;
-                TaskOptions.Height = double.NaN;
-                TaskOptions.Margin = new Thickness(10);
-
+                //TaskOptions.Height = double.NaN;
+                //TaskOptions.Margin = new Thickness(10);
+                
                 if (_study != null && viewModel != null)
                 {
                     _hof = viewModel.GetHallOfFame(_study);
                     _complete = viewModel.GetHallOfFame(_study); // Get it twice to avoid cloning
-                    _complete = viewModel.GetComplete(_study, _complete);
+                    //_complete = viewModel.GetComplete(_study, _complete);
                     viewModel.InitProperties(_hof.solutions.Length, _complete.solutions.Length, viewModel.UseComplete);
 
-                    DisplayOrHideControls(true, true);
+                    //DisplayOrHideControls(true, true);
                 }
             }
         }

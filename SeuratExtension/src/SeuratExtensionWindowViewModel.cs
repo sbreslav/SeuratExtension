@@ -14,6 +14,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -558,8 +559,10 @@ namespace SeuratExtension
 
             // Copy files
             var fileNames = new string[] { "index.html", "playground.css", "playground.js", "vis-graph3d.min.js" };
+            Assembly assembly = Assembly.Load("DynamoCore");
+            Version ver = assembly.GetName().Version;
             foreach (var fileName in fileNames) {
-                var sourcePath = Environment.ExpandEnvironmentVariables("%appdata%\\Dynamo\\Dynamo Core\\2.2\\packages\\SeuratExtension\\extra");
+                var sourcePath = Environment.ExpandEnvironmentVariables("%appdata%\\Dynamo\\Dynamo Core\\"+ ver.Major.ToString() + "." + ver.Minor.ToString() + "\\packages\\SeuratExtension\\extra");
                 string targetPath = _folder;
                 string sourceFile = System.IO.Path.Combine(sourcePath, fileName);
                 string destFile = System.IO.Path.Combine(targetPath, fileName);
