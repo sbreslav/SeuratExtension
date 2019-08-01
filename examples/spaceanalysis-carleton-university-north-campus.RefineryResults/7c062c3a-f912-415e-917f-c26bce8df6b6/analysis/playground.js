@@ -5,20 +5,23 @@ function load() {
   draw();
   
 
-  var layout = {barmode: 'group', margin: { t: 0, l: 40}};
+  var layout = {barmode: 'group', title: {
+    text:'Cluster Avarages'}, hovermode: 'closest', margin: { t: 0, l: 40}};
   var clusterStats2D = getDataClusterStats2D();
   clusterStatsDiv = document.getElementById('clusterStats');
-  Plotly.newPlot(clusterStatsDiv, clusterStats2D, layout);
+  Plotly.newPlot(clusterStatsDiv, clusterStats2D, layout, {showLink: false, showSendToCloud: false, });
 
   var data2D = getDataMetrics2D();
   Graph2D = document.getElementById('2dGraph');
 	Plotly.plot( Graph2D, data2D, {
-  margin: { t: 0, b: 0 } } );
+  margin: { t: 0, b: 0 }, title: {
+    text:'2D t-SNE dimension reduction & k-means clustering'}, hovermode: 'closest' } );
 
   var data2D_2 = getVectorDataMetrics2D();
   Graph2DVector = document.getElementById('2dVectorGraph');
 	Plotly.plot( Graph2DVector, data2D_2, {
-  margin: { t: 0, b: 0 } } );
+  margin: { t: 0, b: 0 },  title: {
+    text:'Star Coordinates'}, hovermode: 'closest' }, {showLink: false, showSendToCloud: false, } );
   
   Graph2D.on('plotly_click', function(data){
       var pts = '';
@@ -159,6 +162,40 @@ function getVectorDataMetrics2D() {
   var a = 0;
   
 
+  
+  col = [[37, 107, 73],
+  [126, 170, 95],
+  [213, 181, 83],
+  [249, 126, 106],
+  [210, 72, 84],
+  [37, 107, 73],
+  [126, 170, 95],
+  [213, 181, 83],
+  [249, 126, 106],
+  [210, 72, 84],
+  [37, 107, 73],
+  [126, 170, 95],
+  [213, 181, 83],
+  [249, 126, 106],
+  [210, 72, 84]];
+  var data3d = metricsValues2D; //csv2array(csv);
+  for (var row = 0; row < data3d.length; row++) {
+    var cat = data3d[row][2];
+    var len = dataStream.length;
+    while ((len-1) < cat){
+      dataStream.push({x:[], y:[], z:[], mode: 'markers',
+      type: 'scatter',
+      name: 'Cluster '+ len,
+      marker: {
+        size: 4
+      }});
+      len++;
+    }
+    if(cat < 5){
+      dataStream[cat].marker.color = 'rgb('+col[cat][0]+','+col[cat][1]+','+col[cat][2]+')';
+    }
+  }
+
   dataStream.push({x:[], y:[], text:[],
     mode: 'markers',
     type: 'scatter',
@@ -167,19 +204,12 @@ function getVectorDataMetrics2D() {
     });
   for (var i=0; i <  labels.length; ++i){
     a = a+angle;
-    dataStream[0].x.push(Math.cos(a));
-    dataStream[0].y.push(Math.sin(a));
-    dataStream[0].text.push(labels[i]);
+    dataStream[dataStream.length-1].x.push(Math.cos(a));
+    dataStream[dataStream.length-1].y.push(Math.sin(a));
+    dataStream[dataStream.length-1].text.push(labels[i]);
 
   }
-
-  dataStream.push({x:[], y:[],
-    mode: 'markers',
-    type: 'scatter',
-    name: 'Data',
-    marker: { size: 3 }
-    });
-
+  
     var maxVals = {};
     for (var i1=0; i1 <  data.length; ++i1){
       for (var j=0; j < labels.length; j++){
@@ -192,15 +222,16 @@ function getVectorDataMetrics2D() {
     for (var i2=0; i2 <  data.length; ++i2){
       var x = 0;
       var y = 0;
+      var cat = data3d[i2][2];
       for (var j2=0; j2 < labels.length; j2++){
-        x += (data[i2][j2] / maxVals[j2]) * dataStream[0].x[j2];
-        y += (data[i2][j2] / maxVals[j2]) * dataStream[0].y[j2];
+        x += (data[i2][j2] / maxVals[j2]) * dataStream[dataStream.length-1].x[j2];
+        y += (data[i2][j2] / maxVals[j2]) * dataStream[dataStream.length-1].y[j2];
       }
       //x /= labels.length;
       //y /= labels.length;
 
-      dataStream[1].x.push(x);
-      dataStream[1].y.push(y);
+      dataStream[cat].x.push(x);
+      dataStream[cat].y.push(y);
     }
   return dataStream;
 }
