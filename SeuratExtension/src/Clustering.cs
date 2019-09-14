@@ -220,7 +220,7 @@ namespace SeuratExtension.src
         }
 
         // This function will go through each parameter and get the average value for cluster
-        double[] GetClusterAverage(double[][] refineryData, int[] labeledData, int clusterNumber, double[] highestParameters)
+        double[] GetClusterAverage(double[][] refineryData, int[] labeledData, int clusterNumber)
         {
             // First dimension of refineryData represents the results of each solution
             // Second dimension is for each parameter
