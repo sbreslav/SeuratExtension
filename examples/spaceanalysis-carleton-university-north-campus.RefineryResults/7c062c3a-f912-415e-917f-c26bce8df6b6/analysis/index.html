@@ -1,40 +1,48 @@
-
 <!doctype html>
 <html>
+
 <head>
+    <meta charset="utf-8" />
     <title>Seurat Extension Visualization</title>
-    <script type="text/javascript" src="results.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" src="results.js"></script>
     <script type="text/javascript" src="main.js"></script>
     <link rel='stylesheet' href='styles.css' type='text/css'>
-    <script type="text/javascript">
-    </script>
-    
 </head>
-<body onload="load();">
-<h1>Seurat Extension Visualization</h1>
-<table style="width:100%;">
-<col width="55%">
-<col width="45%">
-<tr>
-    <td rowspan=2>
-        <h2>2D t-SNE dimension reduction & k-means clustering</h2>
-        <div id="2dGraph" style="width:700px;height:450px;padding-bottom: 3px;"></div>
-        <h2>3D t-SNE dimension reduction & k-means clustering</h2>
-        <div id="3dGraph"></div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <h2>Selected Item Details</h2>
-        <textarea id="detailArea" rows="20" style="margin:50px;" cols="50">
-        </textarea>
-        <h2>Star Coordinates</h2>
-        <div id="2dVectorGraph" style="width:700px;height:450px;padding-bottom: 3px;"></div>
-        <h2>Cluster Avarages</h2>
-        <div id="clusterStats"></div>
-    </td>
-</tr>
-</table>
 
+<body onload="load();">
+
+    <!-- <h1>Seurat Extension Visualization</h1>
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout
+    <div class="wrapper">
+        <div id="2dGraph" class="container">2d graph</div>
+        <div id="3dGraph" class="container">3d graph</div>
+        <div id="2dVectorGraph" class="container">2d vector graph</div>
+        <div id="clusterStats" class="container">cluster stats</div>
+        <textarea id="detailArea" class="container" rows="20" cols="50">test</textarea>
+    </div> -->
+
+    <h1 class="box-rounded-corners">Seurat Extension Visualization</h1>
+    <table>
+        <col class="first-column">
+        <col class="second-column">
+        <tr>
+            <td rowspan=2>
+                <h2>2D t-SNE dimension reduction & k-means clustering</h2>
+                <div id="2dGraph" class="box-rounded-corners plot-container-2d"></div>
+                <h2>3D t-SNE dimension reduction & k-means clustering</h2>
+                <div id="3dGraph" class="box-rounded-corners plot-container-3d"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Star Coordinates</h2>
+                <div id="2dVectorGraph" class="box-rounded-corners plot-container-2d"></div>
+                <h2>Selected Item Details</h2>
+                <textarea id="detailArea" rows="20" cols="50"></textarea>
+                <h2>Cluster Averages</h2>
+                <div id="clusterStats" class="box-rounded-corners bar-plot-container"></div>
+            </td>
+        </tr>
+    </table>
 </body>
