@@ -2,29 +2,33 @@ body
 {
   font: 13px Helvetica, "Lucida Grande", Tahoma, Arial, sans-serif;
   background-color: #151a24;
-  margin: 50px;
+  margin: 20px;
 }
 
-/* @font-face {
-  font-family: "Helenka";
-  src: url('/HELENA.woff') format("woff");
-} */
+@font-face {
+  font-family: 'Helenka';
+  src: url('/fonts/HELENA.woff') format('woff'),
+       url('/fonts/HELENA.ttf') format('truetype');
+} 
+
+
 
 h1
 {
-  font-family: Helvetica;
+  font-family: 'Helenka', sanf-serif;
   font-size: 200%;
   color: #FFFFFF;
-  padding: 10px 0 10px 50px;
-  margin: 0 0 0 2%;
+  padding: 12px 0 12px 90px;
+  margin: 0 5% 0 5%;
 }
 
 h2
 {
   font: 18em Helvetica;
   font-size: 150%;
-  padding: 3px;
-  border-bottom: 1px solid #a0c0f0;
+  padding: 7px;
+  border-bottom: 1px dotted #2B7CE9;
+
   color: #2B7CE9;
 }
 
@@ -43,8 +47,11 @@ pre.code
 table
 {
   border-collapse: collapse;
-  width: 100%;
-  margin: 2%;
+  /* border-spacing: 5px; */
+  width: 90%;
+  margin: 0 10% 0 5%;
+
+
 }
 
 th, td
@@ -102,18 +109,31 @@ a:hover {
 }
 
 .plot-container-2d {
-  width: 680px;
-  height: 400px;
+  width: 1020px;
+  height: 420px;
+}
+
+.title-container {
+  width: 2000px;
+  height: 100px;
+  text-align: center;
+  padding: 0px 0 0px 90px;
+  margin: 0 5% 0 5%;
+
+}
+
+.title-image {
+  margin: 10px 0 0 0;
 }
 
 .plot-container-3d {
-  width: 680px;
-  height: 562px;
+  width: 1020px;
+  height: 600px;
 }
 
 .bar-plot-container {
-  width: 680px;
-  height: 300px;
+  width: 1020px;
+  height: 340px;
 }
 
 /* 

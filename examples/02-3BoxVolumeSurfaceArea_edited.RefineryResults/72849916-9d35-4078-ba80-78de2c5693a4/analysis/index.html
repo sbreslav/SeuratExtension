@@ -1,54 +1,50 @@
-
 <!doctype html>
 <html>
 
 <head>
-    <title>Seurat Extension Visualization</title>
-<script type="text/javascript" src="results.js"></script>
-    <script type="text/javascript" src="vis-graph3d.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Seurat</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script type="text/javascript" src="playground.js"></script>
-    <link rel='stylesheet' href='playground.css' type='text/css'>
-	
-    <script type="text/javascript">
-        // Called when the Visualization API is loaded.
-		
-		loadCsvColoredDotsExample();
-       
-    </script>
-    
+    <script type="text/javascript" src="results.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link rel='stylesheet' href='styles.css' type='text/css'>
 </head>
 
 <body onload="load();">
 
-<h1>Seurat Extension Visualization</h1>
+    <!-- <h1>Seurat Extension Visualization</h1>
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout
+    <div class="wrapper">
+        <div id="2dGraph" class="container">2d graph</div>
+        <div id="3dGraph" class="container">3d graph</div>
+        <div id="2dVectorGraph" class="container">2d vector graph</div>
+        <div id="clusterStats" class="container">cluster stats</div>
+        <textarea id="detailArea" class="container" rows="20" cols="50">test</textarea>
+    </div> -->
 
-<table style="width:100%;">
-<col width="70%">
-<col width="30%">
-
-<tr>
-    
-    <td rowspan=2>
-        <h2>Graph</h2>
-        <!--<p>
-            <input type="button" value="Draw graph" onclick="draw();" id="draw">
-        </p>-->
-
-        <div id="3dGraph"></div>
-        <div id="2dGraph" style="width:600px;height:450px;"></div>
-    </td>
-</tr>
-<tr>
-    <td>
-        <h2>Statistics</h2>
-        <div id="clusterStats"></div>
-        <textarea id="detailArea" rows="15" cols="50">
-            
-        </textarea>
-        
-    </td>
-</tr>
-</table>
-
+    <div class="box-rounded-corners title-container">
+        <img class="title-image" src="title.jpg" />
+    </div>
+    <table>
+        <col class="first-column">
+        <col class="second-column">
+        <tr>
+            <td rowspan=2>
+                <h2>T-SNE 2D & K-MEANS</h2>
+                <div id="2dGraph" class="box-rounded-corners plot-container-2d"></div>
+                <h2>T-SNE 3D & K-MEANS</h2>
+                <div id="3dGraph" class="box-rounded-corners plot-container-3d"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>STAR COORDINATES</h2>
+                <div id="2dVectorGraph" class="box-rounded-corners plot-container-2d"></div>
+                <h2>SELECTED ITEM DETAILS</h2>
+                <textarea id="detailArea" rows="20" cols="50"></textarea>
+                <h2>CLUSTER AVERAGES</h2>
+                <div id="clusterStats" class="box-rounded-corners bar-plot-container"></div>
+            </td>
+        </tr>
+    </table>
 </body>

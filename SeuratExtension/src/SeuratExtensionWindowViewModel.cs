@@ -558,7 +558,7 @@ namespace SeuratExtension
             File.WriteAllText(_folder + "\\results.js", resultsData.ToString());
 
             // Copy files
-            var fileNames = new string[] { "index.html", "styles.css", "main.js" };
+            var fileNames = new string[] { "index.html", "styles.css", "main.js", "title.jpg" };
             Assembly assembly = Assembly.Load("DynamoCore");
             Version ver = assembly.GetName().Version;
             foreach (var fileName in fileNames) {

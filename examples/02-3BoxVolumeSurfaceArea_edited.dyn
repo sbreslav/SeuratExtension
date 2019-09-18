@@ -16,7 +16,7 @@
       "Id": "b1a0f7d632a649659ad512529efeb2af",
       "Name": "C3 X-Location",
       "Type": "number",
-      "Value": "24",
+      "Value": "104",
       "MaximumValue": 120.0,
       "MinimumValue": 0.0,
       "StepValue": 1.0,
@@ -27,7 +27,7 @@
       "Id": "0cf69586e89248b4bbe184523402f436",
       "Name": "C2 Y-Location",
       "Type": "number",
-      "Value": "61",
+      "Value": "40",
       "MaximumValue": 100.0,
       "MinimumValue": 0.0,
       "StepValue": 1.0,
@@ -38,7 +38,7 @@
       "Id": "b09c8795409548328c6a1f225b75ab1d",
       "Name": "C2 X-Location",
       "Type": "number",
-      "Value": "25",
+      "Value": "16",
       "MaximumValue": 50.0,
       "MinimumValue": 0.0,
       "StepValue": 1.0,
@@ -49,7 +49,7 @@
       "Id": "3d1033c25ae94905822828b149c88fe2",
       "Name": "C1 Height",
       "Type": "number",
-      "Value": "124",
+      "Value": "211",
       "MaximumValue": 360.0,
       "MinimumValue": 19.0,
       "StepValue": 1.0,
@@ -60,7 +60,7 @@
       "Id": "1b696315f21d467dbe99b7efb19868c1",
       "Name": "C2 Height",
       "Type": "number",
-      "Value": "221",
+      "Value": "410",
       "MaximumValue": 500.0,
       "MinimumValue": 20.0,
       "StepValue": 1.0,
@@ -71,7 +71,7 @@
       "Id": "b27e893594024743a6b1c7b1d80a710f",
       "Name": "C3 Height",
       "Type": "number",
-      "Value": "168",
+      "Value": "172",
       "MaximumValue": 350.0,
       "MinimumValue": 20.0,
       "StepValue": 1.0,
@@ -82,7 +82,7 @@
       "Id": "4ec8718ed7e14b8da98c6a43be4cec19",
       "Name": "C3 Y-Location",
       "Type": "number",
-      "Value": "78",
+      "Value": "56",
       "MaximumValue": 120.0,
       "MinimumValue": 20.0,
       "StepValue": 1.0,
@@ -94,43 +94,43 @@
     {
       "Id": "ed096ab2c6bc40609cc6aeb4d33bfad4",
       "Name": "MAX TotalSurfaceArea-MAX",
-      "Type": "float",
-      "InitialValue": "198616",
+      "Type": "unknown",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     },
     {
       "Id": "848b941c81034d72a094bfbee5196128",
       "Name": "MIN TotalVolume",
-      "Type": "float",
-      "InitialValue": "2710590",
+      "Type": "unknown",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     },
     {
       "Id": "dadb142e438341279ffccdda4c32a934",
       "Name": "MIN Total Footprint",
-      "Type": "float",
-      "InitialValue": "12490",
+      "Type": "unknown",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     },
     {
       "Id": "a72b9b30276e45d98e993fa357b0b98c",
       "Name": "MIN H1 - from Average ",
-      "Type": "float",
-      "InitialValue": "56.6666666666667",
+      "Type": "unknown",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     },
     {
       "Id": "08bf557a84674349a8ec3fea12d47f3d",
       "Name": "MIN - from Average  ",
-      "Type": "float",
-      "InitialValue": "159.333333333333",
+      "Type": "unknown",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     },
     {
       "Id": "bfe3a773f7b54badbb337c32bdb58e7d",
       "Name": "MIN H3 - from Average ",
-      "Type": "float",
-      "InitialValue": "102.666666666667",
+      "Type": "unknown",
+      "InitialValue": "",
       "Description": "Visualize the output of node."
     }
   ],
@@ -286,7 +286,7 @@
       "MaximumValue": 120.0,
       "MinimumValue": 0.0,
       "StepValue": 1.0,
-      "InputValue": 24.0,
+      "InputValue": 104.0,
       "Id": "b1a0f7d632a649659ad512529efeb2af",
       "Inputs": [],
       "Outputs": [
@@ -310,7 +310,7 @@
       "MaximumValue": 100.0,
       "MinimumValue": 0.0,
       "StepValue": 1.0,
-      "InputValue": 61.0,
+      "InputValue": 40.0,
       "Id": "0cf69586e89248b4bbe184523402f436",
       "Inputs": [],
       "Outputs": [
@@ -334,7 +334,7 @@
       "MaximumValue": 50.0,
       "MinimumValue": 0.0,
       "StepValue": 1.0,
-      "InputValue": 25.0,
+      "InputValue": 16.0,
       "Id": "b09c8795409548328c6a1f225b75ab1d",
       "Inputs": [],
       "Outputs": [
@@ -549,7 +549,7 @@
       "MaximumValue": 360.0,
       "MinimumValue": 19.0,
       "StepValue": 1.0,
-      "InputValue": 124.0,
+      "InputValue": 211.0,
       "Id": "3d1033c25ae94905822828b149c88fe2",
       "Inputs": [],
       "Outputs": [
@@ -573,7 +573,7 @@
       "MaximumValue": 500.0,
       "MinimumValue": 20.0,
       "StepValue": 1.0,
-      "InputValue": 221.0,
+      "InputValue": 410.0,
       "Id": "1b696315f21d467dbe99b7efb19868c1",
       "Inputs": [],
       "Outputs": [
@@ -597,7 +597,7 @@
       "MaximumValue": 350.0,
       "MinimumValue": 20.0,
       "StepValue": 1.0,
-      "InputValue": 168.0,
+      "InputValue": 172.0,
       "Id": "b27e893594024743a6b1c7b1d80a710f",
       "Inputs": [],
       "Outputs": [
@@ -970,7 +970,7 @@
       "MaximumValue": 120.0,
       "MinimumValue": 20.0,
       "StepValue": 1.0,
-      "InputValue": 78.0,
+      "InputValue": 56.0,
       "Id": "4ec8718ed7e14b8da98c6a43be4cec19",
       "Inputs": [],
       "Outputs": [
@@ -3016,13 +3016,13 @@
           "dd20e755bd1e43998e1e93da431ea3bc"
         ],
         "Left": 15.427982163100069,
-        "Top": -973.3919920627684,
+        "Top": -820.3919920627684,
         "Width": 632.23562714206912,
-        "Height": 657.029896763099,
+        "Height": 504.02989676309903,
         "FontSize": 48.0,
         "InitialTop": -790.3919920627684,
         "InitialHeight": 411.02989676309903,
-        "TextblockHeight": 173.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFFFFFFF"
       },
       {
@@ -3038,7 +3038,7 @@
         "FontSize": 14.0,
         "InitialTop": -444.14244064404465,
         "InitialHeight": 140.0,
-        "TextblockHeight": 20.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFFFC999"
       },
       {
@@ -3050,11 +3050,11 @@
         "Left": 651.884640079439,
         "Top": -634.82412613856036,
         "Width": 314.0,
-        "Height": 146.0,
+        "Height": 146.5,
         "FontSize": 14.0,
         "InitialTop": -604.82412613856036,
         "InitialHeight": 140.0,
-        "TextblockHeight": 20.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFB9F9E1"
       },
       {
@@ -3066,11 +3066,11 @@
         "Left": 651.884640079439,
         "Top": -792.04474297171055,
         "Width": 314.0,
-        "Height": 146.0,
+        "Height": 146.5,
         "FontSize": 14.0,
         "InitialTop": -762.04474297171055,
         "InitialHeight": 140.0,
-        "TextblockHeight": 20.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFFFB8D8"
       },
       {
@@ -3087,13 +3087,13 @@
           "2a8616525033489d84d8ef25f70c9d0e"
         ],
         "Left": 1090.51183856252,
-        "Top": -814.923828114962,
-        "Width": 319.0,
-        "Height": 771.136889729832,
+        "Top": -704.923828114962,
+        "Width": 319.5,
+        "Height": 661.136889729832,
         "FontSize": 36.0,
         "InitialTop": -674.923828114962,
         "InitialHeight": 708.136889729832,
-        "TextblockHeight": 130.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFFFB8D8"
       },
       {
@@ -3105,13 +3105,13 @@
           "d0b806b6541043bdb06b0b44e2d2cb34"
         ],
         "Left": 4247.6314412212823,
-        "Top": -1293.8753137619447,
-        "Width": 504.39336250897941,
-        "Height": 276.61364785663477,
+        "Top": -1270.8753137619447,
+        "Width": 504.89336250897941,
+        "Height": 238.61364785663477,
         "FontSize": 36.0,
         "InitialTop": -1240.8753137619447,
         "InitialHeight": 259.61364785663477,
-        "TextblockHeight": 43.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFFFAA45"
       },
       {
@@ -3122,13 +3122,13 @@
           "9956fdd866ea41a1bb50a2c1a9dbf5b6"
         ],
         "Left": 2932.3175664052519,
-        "Top": -361.55594161292424,
+        "Top": -208.55594161292427,
         "Width": 485.99658817659974,
-        "Height": 349.65028090419418,
+        "Height": 196.6502809041942,
         "FontSize": 36.0,
         "InitialTop": -178.55594161292427,
         "InitialHeight": 218.6502809041942,
-        "TextblockHeight": 173.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFB9F9E1"
       },
       {
@@ -3152,13 +3152,13 @@
           "1c5db808acc3420aa675d9b40083e555"
         ],
         "Left": 1497.5602827226194,
-        "Top": -1147.4224025340868,
-        "Width": 1358.8063577472958,
-        "Height": 934.9250586669416,
+        "Top": -1081.4224025340868,
+        "Width": 1358.3063577472958,
+        "Height": 868.9250586669416,
         "FontSize": 36.0,
         "InitialTop": -1051.4224025340868,
         "InitialHeight": 890.9250586669416,
-        "TextblockHeight": 86.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFB9F9E1"
       },
       {
@@ -3169,13 +3169,13 @@
           "510c4573713c4fcaae07e7ac311836a4"
         ],
         "Left": 2986.7146935873034,
-        "Top": -798.061794098778,
+        "Top": -688.061794098778,
         "Width": 213.05897934544055,
-        "Height": 361.22793343418778,
+        "Height": 251.22793343418778,
         "FontSize": 36.0,
         "InitialTop": -658.061794098778,
         "InitialHeight": 273.22793343418778,
-        "TextblockHeight": 130.0,
+        "TextblockHeight": 0.0,
         "Background": "#FFB9F9E1"
       },
       {
@@ -3187,13 +3187,13 @@
           "7fcb9f93670d4b22acafd99cdf085edc"
         ],
         "Left": 648.77054977154933,
-        "Top": -1690.9881154370164,
-        "Width": 140.80066904552507,
-        "Height": 367.54773701633781,
+        "Top": -1624.9881154370164,
+        "Width": 141.30066904552507,
+        "Height": 301.54773701633781,
         "FontSize": 36.0,
         "InitialTop": -1594.9881154370164,
-        "InitialHeight": 384.47064966262542,
-        "TextblockHeight": 86.0,
+        "InitialHeight": 323.54773701633781,
+        "TextblockHeight": 0.0,
         "Background": "#FFFF7BAC"
       },
       {
@@ -3206,13 +3206,13 @@
           "fdb6e3d90a0042f79c03e229fb48065b"
         ],
         "Left": 839.970834464879,
-        "Top": -1650.0159375818325,
-        "Width": 448.92052770131193,
-        "Height": 320.53532364482567,
+        "Top": -1627.0159375818325,
+        "Width": 449.42052770131193,
+        "Height": 297.53532364482567,
         "FontSize": 36.0,
         "InitialTop": -1597.0159375818325,
         "InitialHeight": 319.53532364482567,
-        "TextblockHeight": 43.0,
+        "TextblockHeight": 0.0,
         "Background": "#FF71C6A8"
       },
       {
@@ -3238,13 +3238,13 @@
           "971f3e142b6e44f58630a1e693a5b08a"
         ],
         "Left": 4253.5844416797281,
-        "Top": -951.39581523714207,
+        "Top": -928.39581523714207,
         "Width": 1230.1341014395302,
-        "Height": 565.8081373335,
+        "Height": 542.8081373335,
         "FontSize": 36.0,
         "InitialTop": -898.39581523714207,
-        "InitialHeight": 737.69437686813683,
-        "TextblockHeight": 43.0,
+        "InitialHeight": 564.8081373335,
+        "TextblockHeight": 0.0,
         "Background": "#FFFFAA45"
       },
       {
