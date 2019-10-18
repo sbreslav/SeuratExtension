@@ -136,7 +136,7 @@ namespace SeuratExtension
         private List<string> _parameterList;
         private Dispatcher _dispatcherUIThread;
         private string _folder;
-        private Dynamo.Models.RunType _previousRunType;
+        //private Dynamo.Models.RunType _previousRunType;
 
         const string enableText = "Click here to launch a capture run. It may take some time, but can be canceled.";
         const string disableText = "Capture canceled; another can be started when current run completes.";
@@ -345,7 +345,24 @@ namespace SeuratExtension
             var nodeList = new List<StudyInfo>();
 
             var i = 0;
+            // Older versions of Refinery store studies in a sub-folder of the graph's location
             var folder = fileName.Replace("dyn", "RefineryResults");
+            i = populateStudyList(folder, i, nodeList);
+
+            // Newer versions of Refinery store studies beneath the user's documents folder
+
+            var documentsPath = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            var graphName = System.IO.Path.GetFileNameWithoutExtension(fileName);
+            var path = documentsPath + "\\Refinery\\" + graphName + ".RefineryResults";
+            populateStudyList(path, i, nodeList);
+
+            // Return a bindable collection
+
+            return new ObservableCollection<StudyInfo>(nodeList);
+        }
+
+        private int populateStudyList(string folder, int i, List<StudyInfo> nodeList)
+        {
             if (System.IO.Directory.Exists(folder))
             {
                 var start = folder.Length + 1;
@@ -354,10 +371,7 @@ namespace SeuratExtension
                     nodeList.Add(new StudyInfo(++i, file.Substring(start), file));
                 }
             }
-
-            // Return a bindable collection
-
-            return new ObservableCollection<StudyInfo>(nodeList);
+            return i;
         }
 
         public async Task RunTasks(StudyInfo study, HallOfFame hof, HallOfFame complete)
